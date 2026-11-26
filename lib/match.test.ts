@@ -144,7 +144,8 @@ test("rule picks never repeat a why, and prices read as money", () => {
 });
 
 test("AI text never shows a raw vertical label", () => {
-  const ai = parseAi('{"read":"A food-drink brand.","picks":[{"theme":"Empire","fit":80,"why":"Fits food-drink stores.","watchOut":"o"}]}', THEMES);
-  assert.equal(ai?.read, "A food and drink brand.");
-  assert.equal(ai?.picks[0].why, "Fits food and drink stores.");
+  const ai = parseAi('{"read":"A food-drink brand at $32.5, not $1.25.","picks":[{"theme":"Empire","fit":80,"why":"Fits food‑drink stores at $19.6.","watchOut":""}]}', THEMES);
+  assert.equal(ai?.read, "A food and drink brand at $32.50, not $1.25.");
+  assert.equal(ai?.picks[0].why, "Fits food and drink stores at $19.60.");
+  assert.equal(ai?.picks[0].watchOut, "Preview it with your own products before you buy.");
 });

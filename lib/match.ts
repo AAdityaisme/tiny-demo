@@ -284,7 +284,8 @@ export function buildPrompt(s: StoreProfile, themes: Theme[]): string {
 The store's vertical is ${store.vertical}, its catalog size is ${store.catalogSize}, and its price band is ${store.priceBand}. Every theme below already fits that vertical and catalog size.
 If a theme is built for the store's vertical, it should usually be one of the picks.
 Justify each pick on category, catalog size and price point, citing the store's numbers. Price point means the store's own product prices (median $${s.priceMedian}): upscale, editorial themes suit high medians, promotion-led themes suit low ones. It never means the theme's price.
-Say it in plain words a merchant would use, not these labels, and only quote numbers that appear in STORE.
+Say it in plain words a merchant would use, not these labels or their ranges, and only quote numbers that appear in STORE. Write prices with two decimals, like $32.50.
+Never claim anything about the store that STORE does not show. Every pick needs a real watchOut.
 A rule-based scorer shortlisted ${shortlist}. Treat that as a hint, not an answer.
 
 STORE (read from its public catalog):
@@ -317,7 +318,7 @@ export function parseAi(text: string, themes: Theme[]): { read: string; picks: P
       theme,
       fit: Math.max(0, Math.min(100, Math.round(Number(p.fit) || 0))),
       why: clean(String(p.why ?? "")),
-      watchOut: clean(String(p.watchOut ?? "")),
+      watchOut: clean(String(p.watchOut ?? "")) || "Preview it with your own products before you buy.",
     });
   }
   return picks.length ? { read: clean(data.read), picks: picks.slice(0, 3) } : null;
@@ -326,7 +327,9 @@ export function parseAi(text: string, themes: Theme[]): { read: string; picks: P
 const clean = (s: string) =>
   s
     .replace(/\s*[—–]\s*/g, ", ")
+    .replace(/[‐‑]/g, "-")
     .replace(/\b(food-drink|wine-spirits|sports-outdoor|kids-pets|art-media)\b/g, (slug) => VERTICAL_LABEL[slug as Vertical])
+    .replace(/\$(\d+)\.(\d)(?!\d)/g, "$$$1.$20")
     .trim();
 
 async function fetchText(url: string, ms: number): Promise<{ ok: boolean; status: number; text: string }> {
