@@ -1,14 +1,13 @@
 /**
  * Server-only state shared by api/match.ts and api/refine.ts: per-domain store reads, AI results, and the
- * committed AI snapshots in data/snapshots.json (written by scripts/precompute.ts).
+ * committed AI snapshots in lib/snapshots.ts (written by scripts/precompute.ts).
  * The in-memory maps live per function instance, so only snapshots survive cold starts.
  */
-import snapshots from "../data/snapshots.json" with { type: "json" };
 import { normalizeDomain, readStore } from "./match.js";
+import { SNAPSHOTS } from "./snapshots.js";
 import { THEMES } from "./themes.js";
 import type { MatchResult } from "./types.js";
 
-const SNAPSHOTS = snapshots as Record<string, MatchResult>;
 const STORE_TTL_MS = 30 * 60 * 1000;
 const stores = new Map<string, { at: number; result: MatchResult }>();
 const aiResults = new Map<string, MatchResult>();

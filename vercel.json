@@ -1,3 +1,4 @@
 {
-  "functions": { "api/match.ts": { "maxDuration": 60 }, "api/refine.ts": { "maxDuration": 60 } }
+  "functions": { "api/match.ts": { "maxDuration": 60 } },
+  "rewrites": [{ "source": "/api/refine", "destination": "/api/match?lane=refine" }]
 }
