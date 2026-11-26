@@ -163,7 +163,10 @@ export function buildPrompt(s: StoreProfile, themes: Theme[]): string {
     colorOrShadeOptions: s.hasColorOptions,
     sampleTitles: s.sampleProducts.map((p) => p.title),
   };
+  const shortlist = rulePicks(s, themes).map((p) => p.theme.name).join(", ");
   return `You are a senior Shopify merchandiser. Pick the 3 best themes for this store from the catalog below. Only use theme names from the catalog. Do not pick the store's current theme.
+If a theme is built for the store's vertical (Beautify for beauty, cosmetics and skincare, Vino for wine), it should usually be one of the picks.
+A rule-based scorer shortlisted ${shortlist}. Treat that as a hint, not an answer.
 
 STORE (read from its public catalog):
 ${JSON.stringify(store)}
