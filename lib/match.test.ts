@@ -1,8 +1,8 @@
-import { test } from "node:test";
+import { mock, test } from "node:test";
 import assert from "node:assert/strict";
-import { buildProfile, catalogSize, classifyStore, clip, eligibleThemes, detectTheme, normalizeDomain, parseAi, rulePicks } from "./match.ts";
+import { buildProfile, buildPrompt, catalogSize, classifyStore, clip, eligibleThemes, detectTheme, normalizeDomain, parseAi, refineWithAi, rulePicks } from "./match.ts";
 import { THEMES } from "./themes.ts";
-import type { StoreProfile } from "./types.ts";
+import type { MatchResult, StoreProfile } from "./types.ts";
 
 test("normalizeDomain accepts store URLs and rejects hosts we must not fetch", () => {
   assert.equal(normalizeDomain("https://www.Allbirds.com/collections/men"), "allbirds.com");
@@ -90,4 +90,38 @@ test("eligibility: vertical themes only serve their vertical, catalog sizes are 
   assert.equal(catalogSize(5), "small");
   assert.equal(catalogSize(152), "medium");
   assert.equal(catalogSize(250), "large");
+});
+
+const aiReply = (picks: string[]) => JSON.stringify({ choices: [{ message: { content: JSON.stringify({ read: "A coffee brand.", picks: picks.map((theme) => ({ theme, fit: 90, why: "w", watchOut: "o" })) }) } }] });
+
+test("AI picks are re-checked against eligibility, backfilled to 3, and the request is deterministic", async () => {
+  const bodies: string[] = [];
+  const fetchMock = mock.method(globalThis, "fetch", async (_url: string, init: { body: string }) => {
+    bodies.push(init.body);
+    return new Response(aiReply(["Tailor", "Beautify", "Empire"]), { status: 200 });
+  });
+  try {
+    const base: MatchResult = { store: coffee, read: "", picks: rulePicks(coffee, THEMES), engine: "rules", model: "rules", ms: 1 };
+    const out = await refineWithAi(base, THEMES);
+    assert.equal(out.engine, "ai");
+    assert.deepEqual(out.picks.map((p) => p.theme.slug).slice(0, 1), ["empire"]);
+    assert.equal(out.picks.length, 3);
+    assert.ok(!out.picks.some((p) => p.theme.slug === "tailor" || p.theme.slug === "beautify"));
+    await refineWithAi(base, THEMES);
+    assert.equal(bodies[0], bodies[1]);
+    assert.equal(typeof JSON.parse(bodies[0]).seed, "number");
+  } finally {
+    fetchMock.mock.restore();
+  }
+});
+
+test("the AI prompt lists only eligible themes and states the store's vertical, size and price band", () => {
+  const prompt = buildPrompt(coffee, THEMES);
+  assert.ok(!prompt.includes("- Tailor ("));
+  assert.ok(!prompt.includes("- Startup ("));
+  assert.ok(prompt.includes("- Empire ("));
+  assert.match(prompt, /food-drink/);
+  assert.match(prompt, /medium/);
+  assert.match(prompt, /value/);
+  assert.match(prompt, /category, catalog size and price point/);
 });

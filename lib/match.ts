@@ -20,6 +20,7 @@ interface ShopifyProduct extends ProductText {
 const UA = "Mozilla/5.0 (compatible; FittingRoomDemo/1.0)";
 const AI_URL = "https://text.pollinations.ai/openai";
 const AI_MODEL = "openai-fast";
+const AI_SEED = 7;
 
 export function normalizeDomain(input: string): string | null {
   const raw = input.trim().toLowerCase();
@@ -236,14 +237,27 @@ export function rulePicks(s: StoreProfile, themes: Theme[]): Pick[] {
     }));
 }
 
+const SIZE_RANGE: Record<CatalogSize, string> = { single: "1 to 3 products", small: "4 to 50 products", medium: "51 to 249 products", large: "250+ products" };
+const BAND_RANGE: Record<PriceBand, string> = { value: "median under $40", mid: "median $40 to $149", premium: "median $150 or more" };
+
+/** The AI prompt for one store. Lists only eligible themes, and is byte-identical for the same store so Pollinations can serve it from cache. */
 export function buildPrompt(s: StoreProfile, themes: Theme[]): string {
-  const catalog = themes
-    .map((t) => `- ${t.name} (${t.studio}, $${t.price}${t.rating ? `, ${t.rating}% positive` : ""}): ${t.tagline} ${t.highlights.slice(0, 110)}`)
+  const candidates = eligibleThemes(s, themes);
+  const size = catalogSize(s.productCount);
+  const band = priceBand(s.priceMedian);
+  const catalog = candidates
+    .map(
+      (t) =>
+        `- ${t.name} (${t.studio}, $${t.price}${t.rating ? `, ${t.rating}% positive` : ""}; built for: ${t.verticals.join(", ") || "any vertical"}; catalog sizes: ${t.catalog.join(", ") || "any"}): ${t.tagline} ${t.highlights.slice(0, 110)}`,
+    )
     .join("\n");
   const store = {
     name: s.name,
     domain: s.domain,
     description: s.description,
+    vertical: s.vertical ?? "unclear",
+    catalogSize: `${size} (${SIZE_RANGE[size]})`,
+    priceBand: `${band} (${BAND_RANGE[band]})`,
     currentTheme: s.currentTheme?.name ?? "unknown",
     products: s.productCountCapped ? "250+" : s.productCount,
     priceRange: [s.priceMin, s.priceMedian, s.priceMax],
@@ -254,19 +268,21 @@ export function buildPrompt(s: StoreProfile, themes: Theme[]): string {
     colorOrShadeOptions: s.hasColorOptions,
     sampleTitles: s.sampleProducts.map((p) => p.title),
   };
-  const shortlist = rulePicks(s, themes).map((p) => p.theme.name).join(", ");
-  return `You are a senior Shopify merchandiser. Pick the 3 best themes for this store from the catalog below. Only use theme names from the catalog. Do not pick the store's current theme.
-If a theme is built for the store's vertical (Beautify for beauty, cosmetics and skincare, Vino for wine), it should usually be one of the picks.
+  const shortlist = rulePicks(s, candidates).map((p) => p.theme.name).join(", ");
+  return `You are a senior Shopify merchandiser. Pick the 3 best themes for this store from the catalog below. Only use theme names from the catalog.
+The store's vertical is ${store.vertical}, its catalog size is ${store.catalogSize}, and its price band is ${store.priceBand}. Every theme below already fits that vertical and catalog size.
+If a theme is built for the store's vertical, it should usually be one of the picks.
+Justify each pick on category, catalog size and price point, citing the store's numbers.
 A rule-based scorer shortlisted ${shortlist}. Treat that as a hint, not an answer.
 
 STORE (read from its public catalog):
 ${JSON.stringify(store)}
 
-CATALOG (29 themes from four studios):
+CATALOG (${candidates.length} eligible themes from Tiny's four studios):
 ${catalog}
 
 Return only JSON, no markdown:
-{"read":"2 sentences on what this store is and what its catalog needs from a theme, citing its numbers","picks":[{"theme":"<exact name>","fit":<0-100>,"why":"2 sentences tied to this store's actual data","watchOut":"1 honest sentence on a tradeoff"}]}
+{"read":"2 sentences on what this store is and what its catalog needs from a theme, citing its numbers","picks":[{"theme":"<exact name>","fit":<0-100>,"why":"2 sentences on category, catalog size and price point, tied to this store's actual data","watchOut":"1 honest sentence on a tradeoff"}]}
 Write plainly. No em dashes.`;
 }
 
@@ -314,7 +330,7 @@ async function askAi(prompt: string): Promise<string> {
   const res = await fetch(AI_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: AI_MODEL, messages: [{ role: "user", content: prompt }], response_format: { type: "json_object" } }),
+    body: JSON.stringify({ model: AI_MODEL, messages: [{ role: "user", content: prompt }], response_format: { type: "json_object" }, seed: AI_SEED }),
     signal: AbortSignal.timeout(45_000),
   });
   if (res.status === 402 || res.status === 429) {
@@ -364,14 +380,16 @@ export async function readStore(input: string, themes: Theme[]): Promise<MatchRe
 }
 
 /**
- * Browser side: ask the AI to re-rank all the studio themes for this store.
- * Runs from the visitor's browser because the free tier rate-limits per IP. Throws AiUnavailable.
+ * Ask the AI to re-rank the eligible studio themes for this store. Picks that break eligibility are dropped,
+ * and rule picks fill the gaps so there are always 3. Runs in the browser and in /api/refine. Throws AiUnavailable.
  */
 export async function refineWithAi(base: MatchResult, themes: Theme[]): Promise<MatchResult> {
   const started = Date.now();
-  const candidates = themes.filter((t) => t.name !== base.store.currentTheme?.name);
+  const candidates = eligibleThemes(base.store, themes);
   const ai = parseAi(await askAi(buildPrompt(base.store, candidates)), candidates);
   if (!ai) throw new AiUnavailable("The AI reply didn't parse, so these are the rule-based picks.", 5);
-  return { ...base, read: ai.read, picks: ai.picks, engine: "ai", model: "gpt-oss-20b via Pollinations", ms: base.ms + Date.now() - started };
+  const backfill = rulePicks(base.store, candidates).filter((r) => !ai.picks.some((p) => p.theme.slug === r.theme.slug));
+  const picks = [...ai.picks, ...backfill].slice(0, 3);
+  return { ...base, read: ai.read, picks, engine: "ai", model: "gpt-oss-20b via Pollinations", ms: base.ms + Date.now() - started };
 }
 
