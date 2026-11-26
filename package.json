@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vercel dev",
     "build": "tsc --noEmit && vite build",
-    "test": "node --experimental-strip-types --test lib/*.test.ts"
+    "test": "node --experimental-strip-types --test lib/*.test.ts",
+    "precompute": "node --experimental-strip-types scripts/precompute.ts"
   },
   "devDependencies": {
     "@vercel/node": "^5.0.0",

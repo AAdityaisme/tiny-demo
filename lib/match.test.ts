@@ -1,6 +1,6 @@
 import { mock, test } from "node:test";
 import assert from "node:assert/strict";
-import { buildProfile, buildPrompt, catalogSize, classifyStore, clip, eligibleThemes, detectTheme, normalizeDomain, parseAi, refineWithAi, rulePicks } from "./match.ts";
+import { AiRateLimited, AiUnavailable, buildProfile, buildPrompt, catalogSize, classifyStore, clip, eligibleThemes, detectTheme, normalizeDomain, parseAi, refineWithAi, rulePicks } from "./match.ts";
 import { THEMES } from "./themes.ts";
 import type { MatchResult, StoreProfile } from "./types.ts";
 
@@ -124,4 +124,14 @@ test("the AI prompt lists only eligible themes and states the store's vertical, 
   assert.match(prompt, /medium/);
   assert.match(prompt, /value/);
   assert.match(prompt, /category, catalog size and price point/);
+});
+
+test("a 402 from the keyless tier surfaces as a rate limit with its Retry-After", async () => {
+  const fetchMock = mock.method(globalThis, "fetch", async () => new Response("limited", { status: 402, headers: { "Retry-After": "38" } }));
+  try {
+    const base: MatchResult = { store: coffee, read: "", picks: [], engine: "rules", model: "rules", ms: 1 };
+    await assert.rejects(refineWithAi(base, THEMES), (e) => e instanceof AiRateLimited && e instanceof AiUnavailable && e.retryAfterSec === 38);
+  } finally {
+    fetchMock.mock.restore();
+  }
 });

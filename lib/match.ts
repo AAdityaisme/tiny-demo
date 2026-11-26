@@ -272,7 +272,8 @@ export function buildPrompt(s: StoreProfile, themes: Theme[]): string {
   return `You are a senior Shopify merchandiser. Pick the 3 best themes for this store from the catalog below. Only use theme names from the catalog.
 The store's vertical is ${store.vertical}, its catalog size is ${store.catalogSize}, and its price band is ${store.priceBand}. Every theme below already fits that vertical and catalog size.
 If a theme is built for the store's vertical, it should usually be one of the picks.
-Justify each pick on category, catalog size and price point, citing the store's numbers.
+Justify each pick on category, catalog size and price point, citing the store's numbers. Price point means the store's own product prices (median $${s.priceMedian}): upscale, editorial themes suit high medians, promotion-led themes suit low ones. It never means the theme's price.
+Say it in plain words a merchant would use, not these labels, and only quote numbers that appear in STORE.
 A rule-based scorer shortlisted ${shortlist}. Treat that as a hint, not an answer.
 
 STORE (read from its public catalog):
@@ -326,6 +327,9 @@ export class AiUnavailable extends Error {
   }
 }
 
+/** The keyless AI tier refused this IP for now (402 or 429 with Retry-After). */
+export class AiRateLimited extends AiUnavailable {}
+
 async function askAi(prompt: string): Promise<string> {
   const res = await fetch(AI_URL, {
     method: "POST",
@@ -334,7 +338,7 @@ async function askAi(prompt: string): Promise<string> {
     signal: AbortSignal.timeout(45_000),
   });
   if (res.status === 402 || res.status === 429) {
-    throw new AiUnavailable("The free AI tier allows one reply every 45 seconds per visitor.", Number(res.headers.get("Retry-After")) || 45);
+    throw new AiRateLimited("The free AI tier allows one reply every 45 seconds per visitor.", Number(res.headers.get("Retry-After")) || 45);
   }
   if (!res.ok) throw new AiUnavailable(`The AI service returned ${res.status}.`, 15);
   const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
