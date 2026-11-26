@@ -1,4 +1,4 @@
-/** Mock results for ?mock=1: the fast rule-based answer, then the AI refinement. */
+/** Mock results for ?mock=1|noai|cached|error: the fast rule-based answer, the AI refinement, and a saved AI answer. */
 import { THEMES } from "../lib/themes.ts";
 import type { MatchResult, StoreProfile, Theme } from "../lib/types.ts";
 
@@ -79,3 +79,5 @@ export const fixture: MatchResult = {
   model: "mock-model",
   ms: 5500,
 };
+
+export const fixtureCached: MatchResult = { ...fixture, cachedAt: "2026-11-26T17:00:00.000Z" };
