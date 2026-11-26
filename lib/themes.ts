@@ -14,7 +14,10 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/empire",
   "image": "https://cdn.shopify.com/theme-store/ssha4t7g0yau5o5im3726ii1l295.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "atlantic",
@@ -28,7 +31,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/atlantic",
   "image": "https://cdn.shopify.com/theme-store/jgi7uw9qne05ac5aaqsqdtuipqfu.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "tailor",
@@ -41,8 +49,14 @@ export const THEMES: Theme[] = [
   "features": " Cart notes In-store pickups Quick buy Slide-out cart   Age verifier Blogs Cross-selling EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Quick view Recommended products Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image hotspot Image zoom Lookbooks Product options Product tabs Product videos Size chart   Collection page navigation Enhanced search Mega menu Product filtering and sorting Recommended products Sticky header Swatch filters",
   "url": "https://themes.shopify.com/themes/tailor",
   "image": "https://cdn.shopify.com/theme-store/jwz86oi3qayf6ozbr087fppa9ej9.jpg?width=800",
-  "verticals": [],
-  "catalog": []
+  "verticals": [
+   "apparel"
+  ],
+  "catalog": [
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "editions",
@@ -56,7 +70,11 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/editions",
   "image": "https://cdn.shopify.com/theme-store/a7puhzbu38qeav4znj74o7n5bkde.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium"
+  ]
  },
  {
   "slug": "startup",
@@ -70,7 +88,10 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/startup",
   "image": "https://cdn.shopify.com/theme-store/sjo4kts4zc365khksm702pv1owe0.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small"
+  ]
  },
  {
   "slug": "grid",
@@ -84,7 +105,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/grid",
   "image": "https://cdn.shopify.com/theme-store/svp84hbdu2rfenfcyy74mnj2bsgf.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "impulse",
@@ -98,7 +124,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/impulse",
   "image": "https://cdn.shopify.com/theme-store/24t6g3l6rz4hnpta3w31fy0pmeov.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "motion",
@@ -112,7 +143,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/motion",
   "image": "https://cdn.shopify.com/theme-store/k1p7zu7ayy2v3xmtdyywg1cqf8xu.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "streamline",
@@ -126,7 +162,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/streamline",
   "image": "https://cdn.shopify.com/theme-store/yi89s96u92rp2pnqc1j7ll2qaj5j.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "expanse",
@@ -140,7 +181,10 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/expanse",
   "image": "https://cdn.shopify.com/theme-store/2fe1z4d5qet5z1010ut35egyqvnx.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "beautify",
@@ -153,8 +197,15 @@ export const THEMES: Theme[] = [
   "features": " Cart notes Gift wrapping Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Quick view Recently viewed Recommended products Right-to-left Stock counter   Animation Before/after image slider Color swatches High-resolution images Image galleries Image hotspot Image rollover Image zoom Product options Product tabs Product videos Shipping/delivery information Size chart Slideshow Usage information   Breadcrumbs Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
   "url": "https://themes.shopify.com/themes/beautify",
   "image": "https://cdn.shopify.com/theme-store/wft30tnb4exeiw8isfrrgnml7ypn.jpg?width=800",
-  "verticals": [],
-  "catalog": []
+  "verticals": [
+   "beauty"
+  ],
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "symmetry",
@@ -168,7 +219,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/symmetry",
   "image": "https://cdn.shopify.com/theme-store/30idl762am0owf752qg8s1kgr5em.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "enterprise",
@@ -182,7 +238,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/enterprise",
   "image": "https://cdn.shopify.com/theme-store/039jijfu2t7y33i234154l6600g3.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "mode",
@@ -196,7 +257,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/mode",
   "image": "https://cdn.shopify.com/theme-store/jdcmes9n8jh7hbp1217irgjuibqy.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "alchemy",
@@ -210,7 +276,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/alchemy",
   "image": "https://cdn.shopify.com/theme-store/qofdp95082b7al4xtkczk7y1vseh.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "showcase",
@@ -224,7 +295,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/showcase",
   "image": "https://cdn.shopify.com/theme-store/at89vngsezhblzovy2o0aq0n7yp5.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "masonry",
@@ -238,7 +314,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/masonry",
   "image": "https://cdn.shopify.com/theme-store/053a0weeuqmzekkt0pdzwfktomy6.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "expression",
@@ -252,7 +333,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/expression",
   "image": "https://cdn.shopify.com/theme-store/mr6yue1bci7wl9l9f592hll4i9im.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "boost",
@@ -266,7 +352,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/boost",
   "image": "https://cdn.shopify.com/theme-store/lex1qax604istop6dx6i1obtrnn9.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "canopy",
@@ -280,7 +371,10 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/canopy",
   "image": "https://cdn.shopify.com/theme-store/enfi1a9ec68edaga4o31vzoyjss4.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "parallax",
@@ -294,7 +388,11 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/parallax",
   "image": "https://cdn.shopify.com/theme-store/ncgetqaijl4dbqwyopyfkhkdojkq.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium"
+  ]
  },
  {
   "slug": "responsive",
@@ -308,7 +406,12 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/responsive",
   "image": "https://cdn.shopify.com/theme-store/smurc1gc2m8in3oxymoauhl09wzk.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "retina",
@@ -322,7 +425,11 @@ export const THEMES: Theme[] = [
   "url": "https://themes.shopify.com/themes/retina",
   "image": "https://cdn.shopify.com/theme-store/plro602ygkh5h21rx4prhh26d4yl.jpg?width=800",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium"
+  ]
  },
  {
   "slug": "flex",
@@ -336,7 +443,12 @@ export const THEMES: Theme[] = [
   "url": "https://outofthesandbox.com/products/flex-theme",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/Fresh.png?v=1711465097",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "turbo",
@@ -350,7 +462,11 @@ export const THEMES: Theme[] = [
   "url": "https://outofthesandbox.com/products/turbo-theme-portland",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/portland-fixed.png?v=1789425063",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "small",
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "superstore",
@@ -364,7 +480,10 @@ export const THEMES: Theme[] = [
   "url": "https://outofthesandbox.com/products/superstore-theme-interior",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/SS-Interior_dbbbbde6-9740-4fbb-9931-9c559109d180.png?v=1710529390",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "vino",
@@ -377,8 +496,13 @@ export const THEMES: Theme[] = [
   "features": "",
   "url": "https://outofthesandbox.com/products/vino-theme",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/Frame_295.png?v=1783363468",
-  "verticals": [],
-  "catalog": []
+  "verticals": [
+   "wine-spirits"
+  ],
+  "catalog": [
+   "medium",
+   "large"
+  ]
  },
  {
   "slug": "launch",
@@ -392,7 +516,11 @@ export const THEMES: Theme[] = [
   "url": "https://outofthesandbox.com/products/launch-theme-bold",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/Launch-Bold.png?v=1723241466",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "single",
+   "small",
+   "medium"
+  ]
  },
  {
   "slug": "pacific",
@@ -406,6 +534,9 @@ export const THEMES: Theme[] = [
   "url": "https://outofthesandbox.com/products/pacific-theme-cool",
   "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/Cool.png?v=1723137069",
   "verticals": [],
-  "catalog": []
+  "catalog": [
+   "medium",
+   "large"
+  ]
  }
 ];
