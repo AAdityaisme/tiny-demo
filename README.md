@@ -2,7 +2,7 @@
 
 **Live:** https://fitting-room.vercel.app
 
-Paste any Shopify store URL. Fitting Room reads the store's public catalog and current theme, then picks the three best themes from the 29 sold by Tiny's four theme studios (Pixel Union, Archetype Themes, Clean Canvas, Out of the Sandbox), with reasons tied to that store's own numbers.
+Paste any Shopify store URL. Fitting Room reads the store's public catalog and current theme, then picks the three best themes from the 29 sold by Tiny's four theme studios (Pixel Union, Archetype Themes, Clean Canvas, Out of the Sandbox), with reasons tied to that store's own numbers. Each pick links to the theme's page on its studio's site.
 
 An unofficial demo. Not affiliated with Tiny.
 
@@ -12,15 +12,20 @@ The four studios share one site nav and one audience ("700k+ Shopify merchants")
 
 ## What it does
 
-1. **Reads the store.** `api/match.ts` fetches the store's homepage and its public `/products.json`. From that it gets the product count, price spread, vendors, top product types, variants, photos per product, color or shade options, and the current theme (from `Shopify.theme.schema_name`). Death Wish Coffee, for example, has 152 products and runs free Dawn.
-2. **Gives an instant answer.** A rule-based scorer matches those signals against each theme's own listing copy and returns three picks in about a second.
-3. **The AI re-ranks.** The browser sends the store profile and all 29 themes to an LLM, which returns a short read of the store and three picks, each with a reason and a tradeoff. The output is checked against the real catalog, so the model can't invent a theme.
+1. **Reads the store.** `api/match.ts` fetches the store's homepage and its public `/products.json`: product count, price spread, vendors, product types, variants, photos, color options, the current theme, and the store's vertical (coffee, beauty, apparel and so on).
+2. **Filters what can fit.** A theme built for one vertical (Tailor for apparel, Beautify for beauty, Vino for wine) is only offered to stores in that vertical, and catalog size rules keep single-product themes away from 250-product stores. This runs in code, before and after the AI.
+3. **Ranks.** A rule-based scorer weighs category, catalog size and price point and answers in about a second. Then an LLM re-ranks the eligible themes and writes a read of the store plus a reason and a tradeoff for each pick. Its output is checked against the catalog and the same eligibility rules.
 
-The catalog (`data/themes.json`) was pulled today from the Shopify Theme Store listings and from outofthesandbox.com (`scripts/build-catalog.py`).
+The catalog (`data/themes.json`) comes from the Shopify Theme Store listings and the studios' own sites (`scripts/build-catalog.py`).
 
 ## The AI, with no API key
 
-It uses Pollinations' free, keyless text API (`gpt-oss-20b`). The free tier allows one reply every 45 seconds per IP, so the call runs from the visitor's browser instead of a shared server IP. If the AI is unavailable, the page keeps the rule-based picks, labels them, and offers a retry once the cooldown ends.
+It uses Pollinations' free, keyless text API (`gpt-oss-20b`), which allows one new reply about every 45 seconds per IP. So:
+
+- The example stores are precomputed (`npm run precompute -- <domains>`, saved in `lib/snapshots.ts`) and load instantly.
+- Each visitor's browser calls the AI from its own IP. If that lane is busy, the server tries from its IP (`/api/refine`) and caches the result per store.
+- If both are busy, the rule picks stay on screen and the AI retries by itself when the wait ends.
+- The request for a store is byte-identical each time, so Pollinations can answer repeats from its cache.
 
 ## Run it
 
@@ -28,13 +33,13 @@ It uses Pollinations' free, keyless text API (`gpt-oss-20b`). The free tier allo
 npm install
 npm test          # node:test on lib/
 npm run build     # typecheck + vite build
-vercel dev        # page + /api/match locally
+vercel dev        # page + API locally
 ```
 
-`?mock=1` runs the page against a fixture with no network. `?store=allbirds.com` runs a store as soon as the page opens.
+`?store=allbirds.com` runs a store as soon as the page opens. `?mock=1` runs against a fixture with no network; `?mock=noai`, `cached`, `error`, `offline` and `down` show the other states.
 
 ## How it was built
 
-Built in an afternoon with an agent swarm. An orchestrator agent researched Tiny's portfolio and the theme catalog from primary sources, then wrote the store reader and AI layer. Meanwhile a second agent built the page against a shared type contract (`lib/types.ts`). The orchestrator checked the whole thing end to end on the live deployment.
+Built with an agent swarm: an orchestrator researched Tiny's portfolio and the theme catalog from primary sources, and worker agents built the matching logic and the page in parallel against a shared type contract (`lib/types.ts`). The orchestrator merged, verified and deployed.
 
 Vanilla TypeScript and CSS on Vite, with one Vercel function. No framework and no runtime dependencies.
