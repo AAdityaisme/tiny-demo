@@ -6,6 +6,8 @@
     <title>Fitting Room</title>
     <meta name="description" content="Paste a Shopify store URL and get the three best-fitting themes from Tiny's four theme studios, reasoned from your real catalog. An unofficial demo." />
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -37,25 +39,22 @@
               autocapitalize="off"
               spellcheck="false"
               placeholder="yourstore.com"
+              aria-describedby="form-hint"
               required
             />
             <button id="submit-btn" type="submit" class="btn-primary">Find my theme</button>
           </div>
-          <p id="form-hint" class="form-hint" hidden></p>
+          <p id="form-hint" class="form-hint" role="alert" hidden></p>
         </form>
 
         <div class="examples">
           <span class="examples-label" id="examples-label">Or try a real store</span>
-          <div class="chips" role="group" aria-labelledby="examples-label">
-            <button type="button" class="chip" data-store="allbirds.com">allbirds.com</button>
-            <button type="button" class="chip" data-store="gymshark.com">gymshark.com</button>
-            <button type="button" class="chip" data-store="kyliecosmetics.com">kyliecosmetics.com</button>
-            <button type="button" class="chip" data-store="deathwishcoffee.com">deathwishcoffee.com</button>
-          </div>
+          <div id="example-chips" class="chips" role="group" aria-labelledby="examples-label"></div>
         </div>
       </section>
 
-      <section id="results" class="results wrap" aria-live="polite" aria-busy="false" aria-label="Results"></section>
+      <section id="results" class="results wrap" aria-label="Results"></section>
+      <p id="announcer" class="visually-hidden" role="status" aria-live="polite"></p>
 
       <section class="why wrap" aria-labelledby="why-title">
         <h2 id="why-title">Why this exists</h2>
