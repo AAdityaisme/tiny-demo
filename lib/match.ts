@@ -137,7 +137,62 @@ export function buildProfile(domain: string, html: string, products: ShopifyProd
 
 const has = (t: Theme, re: RegExp) => re.test(`${t.tagline} ${t.highlights} ${t.features}`);
 
-/** Deterministic fallback: catalog size, price point, vertical and media signals against each theme's own listing copy. */
+const CATALOG_MAX: [CatalogSize, number][] = [["single", 3], ["small", 50], ["medium", 249], ["large", Infinity]];
+
+/** Size bucket for a product count. products.json caps at 250, so 250 means 250 or more. */
+export function catalogSize(count: number): CatalogSize {
+  return CATALOG_MAX.find(([, max]) => count <= max)![0];
+}
+
+/** A theme can be recommended when it isn't the current theme, its verticals (if any) include the store's, and its catalog sizes (if any) include the store's bucket. */
+export function eligibleThemes(s: StoreProfile, themes: Theme[]): Theme[] {
+  const size = catalogSize(s.productCount);
+  return themes.filter(
+    (t) =>
+      t.name !== s.currentTheme?.name &&
+      (!t.verticals.length || (s.vertical !== null && t.verticals.includes(s.vertical))) &&
+      (!t.catalog.length || t.catalog.includes(size)),
+  );
+}
+
+export type PriceBand = "value" | "mid" | "premium";
+const PRICE_UNDER: [PriceBand, number][] = [["value", 40], ["mid", 150], ["premium", Infinity]];
+
+/** Price band for a store's median product price in dollars. */
+export function priceBand(median: number): PriceBand {
+  return PRICE_UNDER.find(([, under]) => median < under)![0];
+}
+
+/** Price positioning read from each theme's own listing copy ("high-end retailers", "playful", "Amazon-inspired"). Unlisted themes are neutral. */
+const POSITIONING: Record<string, "upscale" | "promo"> = {
+  atlantic: "upscale",
+  retina: "upscale",
+  alchemy: "upscale",
+  expression: "upscale",
+  showcase: "upscale",
+  boost: "promo",
+  canopy: "promo",
+  expanse: "promo",
+  impulse: "promo",
+};
+
+export const VERTICAL_LABEL: Record<Vertical, string> = {
+  apparel: "apparel and footwear",
+  beauty: "beauty",
+  "food-drink": "food and drink",
+  "wine-spirits": "wine and spirits",
+  home: "home goods",
+  jewelry: "jewelry",
+  electronics: "electronics",
+  "sports-outdoor": "sports and outdoor",
+  health: "health and wellness",
+  "kids-pets": "kids and pets",
+  "art-media": "art and media",
+};
+
+const countLabel = (s: StoreProfile) => (s.productCountCapped ? "250+" : String(s.productCount));
+
+/** Deterministic scorer: category fit, catalog size fit and price point first, then media signals and rating. Reasons cite the store's own numbers. */
 export function ruleScore(s: StoreProfile, t: Theme): { score: number; reasons: string[] } {
   let score = 50;
   const reasons: string[] = [];
@@ -145,35 +200,38 @@ export function ruleScore(s: StoreProfile, t: Theme): { score: number; reasons: 
     score += points;
     if (reason) reasons.push(reason);
   };
-  const count = s.productCountCapped ? "250+" : String(s.productCount);
-  const big = s.productCount >= 100;
-  const tiny = s.productCount <= 10;
-  if (big && has(t, /large (catalog|inventor)|big catalog|high-volume|expansive|scal/i)) add(22, `It's built for large catalogs, and you list ${count} products.`);
-  if (big && has(t, /single product|small catalog/i)) add(-25);
-  if (tiny && has(t, /single product|small catalog|curat/i)) add(22, `It's made for small, focused catalogs like your ${count} products.`);
-  if (tiny && has(t, /large (catalog|inventor)|big catalog/i)) add(-10);
-  const types = s.topTypes.join(" ").toLowerCase() + " " + s.description.toLowerCase();
-  if (/beauty|cosmetic|skin|makeup|lip/.test(types) && t.slug === "beautify") add(35, "It's the studio's theme made for beauty brands, which matches your catalog.");
-  if (/wine|vineyard/.test(types) && t.slug === "vino") add(35, "It's made for wineries, which matches your catalog.");
-  if (/apparel|clothing|shirt|dress|fashion|shoe|sneaker/.test(types) && has(t, /apparel|fashion/i)) add(14, "Its listing targets apparel and fashion, a big part of what you sell.");
+  const count = countLabel(s);
+  const size = catalogSize(s.productCount);
+  if (s.vertical && t.verticals.includes(s.vertical)) {
+    add(40, `It's built for ${VERTICAL_LABEL[s.vertical]} brands, and your ${count} products read as ${VERTICAL_LABEL[s.vertical]}.`);
+  } else if (s.vertical === "apparel" && has(t, /apparel|fashion (store|merchant|brand)|fashionable/i)) {
+    add(10, "Its listing calls out fashion and apparel, which is what you sell.");
+  }
+  const specialist = t.catalog.length > 0 && t.catalog.length <= 2;
+  if (specialist && (size === "large" || (size === "medium" && s.productCount >= 100))) add(16, `It's built for big catalogs, and you list ${count} products.`);
+  if (specialist && (size === "single" || size === "small")) add(16, `It's made for small catalogs like your ${count} products.`);
+  const band = priceBand(s.priceMedian);
+  const position = POSITIONING[t.slug];
+  if (position === "upscale" && band === "premium") add(12, `It's styled for high-end retail, and your median price is $${s.priceMedian}.`);
+  if (position === "upscale" && band === "value") add(-8);
+  if (position === "promo" && band === "value") add(10, `It's built around promotions and bundles, which suits your $${s.priceMedian} median price.`);
+  if (position === "promo" && band === "premium") add(-8);
   if (s.vendors > 15 && has(t, /wholesal|high-volume/i)) add(10, `It handles high-volume, many-brand stores, and you carry ${s.vendors} vendors.`);
   if (s.avgImages >= 5 && has(t, /visual|imagery|image-first|gallery|galleries/i)) add(8, `It leans on imagery, and your products average ${s.avgImages} photos each.`);
   if (s.hasColorOptions && has(t, /swatch/i)) add(6, "It supports color swatches, which your product options use.");
-  if (s.priceMedian >= 150 && has(t, /high-end|luxur|premium|boutique/i)) add(6, `It's styled for high-end goods, and your median price is $${s.priceMedian}.`);
   if (t.rating) add((t.rating - 85) / 3);
   return { score: Math.max(5, Math.min(97, Math.round(score))), reasons };
 }
 
 export function rulePicks(s: StoreProfile, themes: Theme[]): Pick[] {
-  return themes
-    .filter((t) => t.name !== s.currentTheme?.name)
+  return eligibleThemes(s, themes)
     .map((t) => ({ t, ...ruleScore(s, t) }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => b.score - a.score || (b.t.rating ?? 0) - (a.t.rating ?? 0) || a.t.slug.localeCompare(b.t.slug))
     .slice(0, 3)
     .map(({ t, score, reasons }) => ({
       theme: t,
       fit: score,
-      why: reasons.slice(0, 2).join(" ") || `It's a well-rated all-rounder for a ${s.productCountCapped ? "250+" : s.productCount}-product store.`,
+      why: reasons.slice(0, 2).join(" ") || `It's a well-rated all-rounder for a ${countLabel(s)}-product store at a $${s.priceMedian} median price.`,
       watchOut: "Scored by rules, not AI. Preview it on your own products before buying.",
     }));
 }

@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildProfile, classifyStore, clip, detectTheme, normalizeDomain, parseAi, rulePicks } from "./match.ts";
+import { buildProfile, catalogSize, classifyStore, clip, eligibleThemes, detectTheme, normalizeDomain, parseAi, rulePicks } from "./match.ts";
 import { THEMES } from "./themes.ts";
+import type { StoreProfile } from "./types.ts";
 
 test("normalizeDomain accepts store URLs and rejects hosts we must not fetch", () => {
   assert.equal(normalizeDomain("https://www.Allbirds.com/collections/men"), "allbirds.com");
@@ -63,4 +64,30 @@ test("classifyStore reads the vertical from product types, tags, titles and the 
   assert.equal(classifyStore({ name: "Allbirds", description: "", products: [...items(159, "Shoes", "Wool Runner"), ...items(50, "Socks"), ...items(37, "", "Gift")] }), "apparel");
   assert.equal(classifyStore({ name: "Acme", description: "", products: [...items(20, "Widget"), ...items(5, "Gadget")] }), null);
   assert.equal(classifyStore({ name: "Mixed Goods", description: "", products: [...items(10, "Shirts"), ...items(10, "Candles"), ...items(10, "Coffee")] }), null);
+});
+
+const profile = (over: Partial<StoreProfile>): StoreProfile => ({
+  domain: "x.com", name: "X", description: "", currentTheme: null, productCount: 152, productCountCapped: false,
+  priceMin: 5, priceMedian: 32.5, priceMax: 300, vendors: 1, topTypes: [], avgVariants: 3, avgImages: 4,
+  hasColorOptions: false, vertical: null, sampleProducts: [], ...over,
+});
+const coffee = profile({ name: "Death Wish Coffee", vertical: "food-drink", topTypes: ["Apparel", "Coffee", "Accessories", "Coffee Bundle", "Mugs"] });
+
+test("eligibility: vertical themes only serve their vertical, catalog sizes are respected", () => {
+  const slugs = (s: StoreProfile) => eligibleThemes(s, THEMES).map((t) => t.slug);
+  assert.ok(!slugs(coffee).includes("tailor"));
+  assert.ok(!slugs(coffee).includes("beautify"));
+  assert.ok(!slugs(profile({ vertical: null })).includes("tailor"));
+  assert.ok(slugs(profile({ vertical: "apparel" })).includes("tailor"));
+  assert.ok(!rulePicks(coffee, THEMES).some((p) => p.theme.slug === "tailor"));
+
+  const tiny = profile({ productCount: 5 });
+  for (const p of rulePicks(tiny, THEMES)) assert.ok(p.theme.catalog.includes("small"), `${p.theme.name} is not for small catalogs`);
+  const huge = profile({ productCount: 250, productCountCapped: true });
+  assert.ok(!slugs(huge).includes("startup"));
+  for (const p of rulePicks(huge, THEMES)) assert.ok(p.theme.catalog.includes("large"), `${p.theme.name} is not for large catalogs`);
+  assert.equal(catalogSize(1), "single");
+  assert.equal(catalogSize(5), "small");
+  assert.equal(catalogSize(152), "medium");
+  assert.equal(catalogSize(250), "large");
 });
