@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fitting Room</title>
+    <meta name="description" content="Paste a Shopify store URL and get the three best-fitting themes from Tiny's four theme studios, reasoned from your real catalog. An unofficial demo." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="site-header wrap">
+      <a class="wordmark" href="/">Fitting Room</a>
+      <p class="tagline">An unofficial demo for Tiny's Shopify theme studios</p>
+    </header>
+
+    <main>
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <h1 id="hero-title">Find the theme that fits the store you already run.</h1>
+        <p class="lede">
+          Paste your Shopify store address. Fitting Room reads your public catalog, spots your current theme,
+          and picks the three best fits from 29 premium themes across four studios.
+        </p>
+
+        <form id="match-form" class="match-form" novalidate>
+          <label for="store-url" class="field-label">Your store URL</label>
+          <div class="field-row">
+            <input
+              id="store-url"
+              name="url"
+              type="text"
+              inputmode="url"
+              autocomplete="url"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder="yourstore.com"
+              required
+            />
+            <button id="submit-btn" type="submit" class="btn-primary">Find my theme</button>
+          </div>
+          <p id="form-hint" class="form-hint" hidden></p>
+        </form>
+
+        <div class="examples">
+          <span class="examples-label" id="examples-label">Or try a real store</span>
+          <div class="chips" role="group" aria-labelledby="examples-label">
+            <button type="button" class="chip" data-store="allbirds.com">allbirds.com</button>
+            <button type="button" class="chip" data-store="gymshark.com">gymshark.com</button>
+            <button type="button" class="chip" data-store="kyliecosmetics.com">kyliecosmetics.com</button>
+            <button type="button" class="chip" data-store="deathwishcoffee.com">deathwishcoffee.com</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="results wrap" aria-live="polite" aria-busy="false" aria-label="Results"></section>
+
+      <section class="why wrap" aria-labelledby="why-title">
+        <h2 id="why-title">Why this exists</h2>
+        <ul>
+          <li>Tiny's four studios sell 29 premium Shopify themes to one shared audience of 700k+ merchants.</li>
+          <li>The current finder is a filter quiz over a handful of Pixel Union themes, and it asks for a larger screen.</li>
+          <li>Fitting Room reads the real store instead, then weighs all 29 themes against what it sells.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer wrap">
+      <p>
+        Built in an afternoon by Aadi Sharma with an agent swarm. Not affiliated with Tiny.
+        <a href="https://github.com/AAdityaisme/tiny-demo" target="_blank" rel="noopener">Source on GitHub</a>
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
