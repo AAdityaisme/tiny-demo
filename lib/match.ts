@@ -286,6 +286,7 @@ If a theme is built for the store's vertical, it should usually be one of the pi
 Justify each pick on category, catalog size and price point, citing the store's numbers. Price point means the store's own product prices (median $${s.priceMedian}): upscale, editorial themes suit high medians, promotion-led themes suit low ones. It never means the theme's price.
 Say it in plain words a merchant would use, not these labels or their ranges, and only quote numbers that appear in STORE. Write prices with two decimals, like $32.50.
 Never claim anything about the store that STORE does not show. Every pick needs a real watchOut.
+Voice: a sharp merchandiser talking to a founder. Short, concrete sentences. Lead with the fact, not the theme name. No filler or hype words (perfect, ideal, seamless, elevate, robust, showcase, perfectly, enhance, effortlessly).
 A rule-based scorer shortlisted ${shortlist}. Treat that as a hint, not an answer.
 
 STORE (read from its public catalog):
