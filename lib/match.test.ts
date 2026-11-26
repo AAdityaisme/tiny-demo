@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildProfile, clip, detectTheme, normalizeDomain, parseAi, rulePicks } from "./match.ts";
+import { buildProfile, classifyStore, clip, detectTheme, normalizeDomain, parseAi, rulePicks } from "./match.ts";
 import { THEMES } from "./themes.ts";
 
 test("normalizeDomain accepts store URLs and rejects hosts we must not fetch", () => {
@@ -45,4 +45,22 @@ test("clip ends on a sentence or a whole word", () => {
   assert.equal(clip("Short.", 50), "Short.");
   assert.equal(clip("One sentence here. Another sentence that runs long", 30), "One sentence here.");
   assert.equal(clip("averyveryverylongword another word here", 30), "averyveryverylongword another...");
+});
+
+const items = (n: number, product_type: string, title = product_type, tags: string[] = []) =>
+  Array.from({ length: n }, (_, i) => ({ title: `${title} ${i}`, product_type, tags }));
+
+test("classifyStore reads the vertical from product types, tags, titles and the store's own copy", () => {
+  assert.equal(classifyStore({
+    name: "Death Wish Coffee",
+    description: "We source USDA Organic arabica and robusta coffee beans for our everyday coffee roasts.",
+    products: [...items(37, "Apparel", "Skull Tee"), ...items(36, "Coffee", "Dark Roast"), ...items(25, "Coffee Bundle"), ...items(27, "Accessories", "Sticker"), ...items(7, "Mugs")],
+  }), "food-drink");
+  assert.equal(classifyStore({ name: "Brooklinen", description: "", products: [...items(73, "Content", "Content: BFCM"), ...items(42, "Sheets"), ...items(23, "Towels"), ...items(16, "Blankets"), ...items(10, "Duvet Covers")] }), "home");
+  assert.equal(classifyStore({ name: "Kylie Cosmetics", description: "Award-winning makeup, fragrance, and skincare.", products: [...items(97, "Bundle", "Look Bundle"), ...items(26, "Set"), ...items(6, "Lip Kit"), ...items(5, "Lip Gloss")] }), "beauty");
+  assert.equal(classifyStore({ name: "Partake Foods", description: "Our super delicious cookies.", products: [...items(10, "Cookies"), ...items(4, "", "Snack Pack", ["type_Snack Packs"])] }), "food-drink");
+  assert.equal(classifyStore({ name: "Thursday Boot Company", description: "Work boots and fashion boots.", products: [...items(50, "boots"), ...items(47, "Socks"), ...items(35, "Shoes"), ...items(31, "Shirts"), ...items(17, "Bags")] }), "apparel");
+  assert.equal(classifyStore({ name: "Allbirds", description: "", products: [...items(159, "Shoes", "Wool Runner"), ...items(50, "Socks"), ...items(37, "", "Gift")] }), "apparel");
+  assert.equal(classifyStore({ name: "Acme", description: "", products: [...items(20, "Widget"), ...items(5, "Gadget")] }), null);
+  assert.equal(classifyStore({ name: "Mixed Goods", description: "", products: [...items(10, "Shirts"), ...items(10, "Candles"), ...items(10, "Coffee")] }), null);
 });

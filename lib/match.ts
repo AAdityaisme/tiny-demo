@@ -2,13 +2,16 @@
  * Reads a Shopify store's public catalog and picks the best-fitting themes from Tiny's four theme studios.
  * The AI step uses Pollinations' free, keyless text API; when it fails, a rule-based scorer answers instead.
  */
-import type { MatchResult, Pick, StoreProfile, Theme } from "./types.js";
+import type { CatalogSize, MatchResult, Pick, StoreProfile, Theme, Vertical } from "./types.js";
 
-interface ShopifyProduct {
+interface ProductText {
   title: string;
-  vendor: string;
   product_type: string;
   tags: string[] | string;
+}
+
+interface ShopifyProduct extends ProductText {
+  vendor: string;
   options?: { name: string }[];
   variants: { price: string }[];
   images: { src: string }[];
@@ -70,6 +73,34 @@ export function detectTheme(html: string, themes: Theme[]): StoreProfile["curren
   return hit ? { name: hit.name, studio: hit.studio } : { name: schema, studio: null };
 }
 
+const VERTICAL_WORDS: Record<Vertical, RegExp> = {
+  apparel: /\b(apparel|clothing|fashion|shirts?|t shirts?|tees?|tops?|hoodies?|sweatshirts?|sweaters?|jackets?|coats?|dress(es)?|pants|jeans|shorts|skirts?|leggings|outerwear|boots?|shoes?|sneakers?|footwear|socks?|beanies?|hats?)\b/,
+  beauty: /\b(beauty|cosmetics?|makeup|lips?|lipsticks?|gloss|mascara|eyeshadow|eyeliner|foundation|concealer|blush|bronzer|skincare|skin care|serums?|moisturi[sz]ers?|cleansers?|fragrances?|perfumes?|nail polish)\b/,
+  "food-drink": /\b(food|foods|coffee|espresso|roasts?|tea|teas|chocolates?|cookies?|snacks?|candy|sauces?|spices?|seasonings?|granola|cereal|grahams?|wafers?|honey|jerky|beverages?|sodas?|juices?)\b/,
+  "wine-spirits": /\b(wines?|winery|vineyards?|whiske?y|bourbon|vodka|gin|rum|tequila|mezcal|spirits|cabernet|pinot|chardonnay|merlot|sauvignon)\b/,
+  home: /\b(home decor|bedding|sheets?|towels?|duvets?|duvet covers?|pillows?|pillowcases?|shams?|quilts?|blankets?|comforters?|mattress(es)?|furniture|sofas?|rugs?|candles?|lamps?|cookware)\b/,
+  jewelry: /\b(jewelry|jewellery|necklaces?|bracelets?|earrings?|pendants?|anklets?)\b/,
+  electronics: /\b(electronics|headphones|earbuds|speakers?|chargers?|cables?|phone cases?|cameras?|laptops?)\b/,
+  "sports-outdoor": /\b(camping|tents?|bikes?|cycling|fitness|golf|fishing|hiking|ski|skis|snowboards?|surf|surfboards?)\b/,
+  health: /\b(supplements?|vitamins?|protein|collagen|probiotics?|wellness)\b/,
+  "kids-pets": /\b(baby|babies|toddlers?|kids|toys?|pets?|dogs?|puppy|puppies)\b/,
+  "art-media": /\b(art prints?|posters?|books?|vinyl|records?|magazines?|comics?)\b/,
+};
+
+const words = (s: string) => ` ${s.toLowerCase().replace(/[^a-z]+/g, " ")} `;
+
+/** Best-guess store vertical: the share of products whose type, tags or title name it, plus a boost when the store's own name or description does. Null when no vertical clearly leads. */
+export function classifyStore(input: { name: string; description: string; products: ProductText[] }): Vertical | null {
+  const n = input.products.length || 1;
+  const copy = words(`${input.name} ${input.description}`);
+  const texts = input.products.map((p) => words(`${p.product_type} ${Array.isArray(p.tags) ? p.tags.join(" ") : p.tags} ${p.title}`));
+  const scores = (Object.entries(VERTICAL_WORDS) as [Vertical, RegExp][])
+    .map(([v, re]) => ({ v, score: texts.filter((t) => re.test(t)).length / n + (re.test(copy) ? 0.3 : 0) }))
+    .sort((a, b) => b.score - a.score);
+  const [top, next] = scores;
+  return top.score >= 0.3 && top.score >= 1.5 * next.score ? top.v : null;
+}
+
 export function buildProfile(domain: string, html: string, products: ShopifyProduct[], themes: Theme[]): StoreProfile {
   const prices = products.flatMap((p) => p.variants.map((v) => Number(v.price))).filter((n) => Number.isFinite(n) && n > 0);
   const typeCounts = new Map<string, number>();
@@ -80,10 +111,11 @@ export function buildProfile(domain: string, html: string, products: ShopifyProd
   const title = html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1] ?? "";
   const name = metaContent(html, "og:site_name") || decodeEntities(title).split(/[|–—-]/)[0].trim() || domain;
   const n = products.length || 1;
+  const description = metaContent(html, "description") || metaContent(html, "og:description");
   return {
     domain,
     name,
-    description: clip(metaContent(html, "description") || metaContent(html, "og:description"), 240),
+    description: clip(description, 240),
     currentTheme: detectTheme(html, themes),
     productCount: products.length,
     productCountCapped: products.length >= 250,
@@ -95,7 +127,7 @@ export function buildProfile(domain: string, html: string, products: ShopifyProd
     avgVariants: round1(products.reduce((s, p) => s + p.variants.length, 0) / n),
     avgImages: round1(products.reduce((s, p) => s + p.images.length, 0) / n),
     hasColorOptions: products.some((p) => p.options?.some((o) => /colou?r|shade/i.test(o.name))),
-    vertical: null,
+    vertical: classifyStore({ name, description, products }),
     sampleProducts: products
       .filter((p) => p.images.length)
       .slice(0, 6)
