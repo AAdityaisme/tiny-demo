@@ -13,7 +13,14 @@ export interface Theme {
   features: string;
   url: string;
   image: string | null;
+  /** Verticals the theme is built for; empty means a generalist theme. */
+  verticals: Vertical[];
+  /** Catalog sizes the theme suits. */
+  catalog: CatalogSize[];
 }
+
+export type Vertical = "apparel" | "beauty" | "food-drink" | "wine-spirits" | "home" | "jewelry" | "electronics" | "sports-outdoor" | "health" | "kids-pets" | "art-media";
+export type CatalogSize = "single" | "small" | "medium" | "large";
 
 export interface StoreProfile {
   domain: string;
@@ -30,6 +37,8 @@ export interface StoreProfile {
   avgVariants: number;
   avgImages: number;
   hasColorOptions: boolean;
+  /** Best-guess vertical from product types, tags and titles; null when unclear. */
+  vertical: Vertical | null;
   sampleProducts: { title: string; image: string | null; price: number }[];
 }
 
@@ -47,8 +56,12 @@ export interface MatchResult {
   engine: "ai" | "rules";
   model: string;
   ms: number;
+  /** Set when the AI picks were served from a snapshot or the server cache instead of computed now (ISO time). */
+  cachedAt?: string;
 }
 
 export interface MatchError {
   error: string;
+  /** On 429 from /api/refine: seconds until the server's AI lane is free again. */
+  retryAfterSec?: number;
 }

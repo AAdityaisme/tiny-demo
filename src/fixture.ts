@@ -23,6 +23,7 @@ const store: StoreProfile = {
   avgVariants: 7.4,
   avgImages: 5.2,
   hasColorOptions: true,
+  vertical: "home",
   sampleProducts: [
     { title: "Stonewashed Linen Duvet Cover", image: null, price: 240 },
     { title: "Waffle Bath Towel", image: null, price: 38 },

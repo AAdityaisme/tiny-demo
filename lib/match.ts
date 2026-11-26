@@ -95,6 +95,7 @@ export function buildProfile(domain: string, html: string, products: ShopifyProd
     avgVariants: round1(products.reduce((s, p) => s + p.variants.length, 0) / n),
     avgImages: round1(products.reduce((s, p) => s + p.images.length, 0) / n),
     hasColorOptions: products.some((p) => p.options?.some((o) => /colou?r|shade/i.test(o.name))),
+    vertical: null,
     sampleProducts: products
       .filter((p) => p.images.length)
       .slice(0, 6)
