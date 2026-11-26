@@ -322,7 +322,7 @@ export function parseAi(text: string, themes: Theme[]): { read: string; picks: P
       watchOut: clean(String(p.watchOut ?? "")) || "Preview it with your own products before you buy.",
     });
   }
-  return picks.length ? { read: clean(data.read), picks: picks.slice(0, 3) } : null;
+  return picks.length ? { read: clean(data.read), picks: picks.slice(0, 3).sort((a, b) => b.fit - a.fit) } : null;
 }
 
 const clean = (s: string) =>

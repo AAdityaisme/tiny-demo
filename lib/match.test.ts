@@ -148,4 +148,6 @@ test("AI text never shows a raw vertical label", () => {
   assert.equal(ai?.read, "A food and drink brand at $32.50, not $1.25.");
   assert.equal(ai?.picks[0].why, "Fits food and drink stores at $19.60.");
   assert.equal(ai?.picks[0].watchOut, "Preview it with your own products before you buy.");
+  const ranked = parseAi('{"read":"r","picks":[{"theme":"Tailor","fit":92},{"theme":"Empire","fit":86},{"theme":"Canopy","fit":88}]}', THEMES);
+  assert.deepEqual(ranked?.picks.map((p) => p.fit), [92, 88, 86]);
 });
