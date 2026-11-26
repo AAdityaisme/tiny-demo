@@ -61,7 +61,7 @@ export const SNAPSHOTS: Record<string, MatchResult> = {
     }
    ]
   },
-  "read": "Death Wish Coffee sells 152 products centered on coffee, mugs, and apparel, with a median price of $32.5 and a catalog size of medium. The store needs a theme that can handle a mid‑sized inventory and showcase value‑oriented, promotion‑friendly products.",
+  "read": "Death Wish Coffee sells 152 food and drink items, median price $32.50, medium catalog size.",
   "picks": [
    {
     "theme": {
@@ -73,7 +73,7 @@ export const SNAPSHOTS: Record<string, MatchResult> = {
      "rating": 95,
      "highlights": "Unrivalled shopping experience Built for large carts and inventories, with a prominent search bar and the option for an always-visible cart sidebar. 10+ years of experience Who else can say that? We know what works, because we’ve tried it all. We’ve poured our expertise into every corner of this theme. Compete with big retailers Loaded with all the tools you need: SEO, speed, performance, flexible sections, predictive search, advanced product filters and much more.",
      "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Account menu   Age verifier Back-in-stock alert Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick order list Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Ingredients or nutritional information Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Animation Combined listing Shopify Plus   Back-to-top button Breadcrumbs Collection page navigation Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended ",
-     "url": "https://themes.shopify.com/themes/canopy",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/canopy",
      "image": "https://cdn.shopify.com/theme-store/enfi1a9ec68edaga4o31vzoyjss4.jpg?width=800",
      "verticals": [],
      "catalog": [
@@ -81,31 +81,9 @@ export const SNAPSHOTS: Record<string, MatchResult> = {
       "large"
      ]
     },
-    "fit": 95,
-    "why": "Canopy is built for medium to large catalogs and its shopper‑friendly layout highlights promotions, perfect for a $32.5 median price line. The theme’s strong search and feature‑rich experience matches the 152‑product food‑drink line.",
-    "watchOut": "It can feel slightly heavy for a brand looking for a minimalist look."
-   },
-   {
-    "theme": {
-     "slug": "superstore",
-     "name": "Superstore",
-     "studio": "Out of the Sandbox",
-     "price": 320,
-     "tagline": "A wholesale theme with epic design flexibility.",
-     "rating": null,
-     "highlights": "A wholesale theme with epic design flexibility. The ultimate Shopify theme for wholesalers and high-volume stores. Build your business with power, performance, and tons of design and layout options. Purchase details Your theme will be delivered as a ZIP file via email, once you complete your purchase. This file will include ALL of Superstore's built-in styles ( Beauty , Fashion , Tech , and Interior ). Compatible with Online Store 2.0",
-     "features": "",
-     "url": "https://outofthesandbox.com/products/superstore-theme-interior",
-     "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/SS-Interior_dbbbbde6-9740-4fbb-9931-9c559109d180.png?v=1710529390",
-     "verticals": [],
-     "catalog": [
-      "medium",
-      "large"
-     ]
-    },
     "fit": 90,
-    "why": "Superstore’s wholesale‑style design gives clear product values and bundle options, ideal for a coffee brand offering bundles and accessories at a low price point. Its modular focus supports up to 249 items, matching the store’s 152 products.",
-    "watchOut": "The wholesale aesthetic may seem too bulk‑oriented for a premium coffee brand."
+    "why": "Mid-sized catalog, 152 products. Value price point suited to clearance-style promotion.",
+    "watchOut": "Search bar prominence can crowd the home page."
    },
    {
     "theme": {
@@ -117,7 +95,7 @@ export const SNAPSHOTS: Record<string, MatchResult> = {
      "rating": 93,
      "highlights": "Advanced custom promotion Boost your sales—highlight promos on the homepage, in collection page banners, on large photos in the product page or even in the footer. Boost upsell and cross-sell Inspire customers and increase order value with cart upsell, and relevant products recommendations and promotions throughout your store. Powerful navigation and filter Perfect for large inventory stores, it makes browsing products a hassle-free experience—powerful multi-category sidebar filter, multi-column",
      "features": " Cart notes In-store pickups Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Before/after image slider Animation Combined listing Shopify Plus   Breadcrumbs Collection page navigation Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header",
-     "url": "https://themes.shopify.com/themes/expanse",
+     "url": "https://archetypethemes.co/products/shopify-theme-expanse",
      "image": "https://cdn.shopify.com/theme-store/2fe1z4d5qet5z1010ut35egyqvnx.jpg?width=800",
      "verticals": [],
      "catalog": [
@@ -126,13 +104,715 @@ export const SNAPSHOTS: Record<string, MatchResult> = {
      ]
     },
     "fit": 85,
-    "why": "Expanse is geared toward larger inventories and provides advanced promotion tools that can showcase discounts on coffee bundles. It scales well with a catalog of 152 items and aligns with a value‑priced, diverse product mix.",
-    "watchOut": "The layout can be overly feature‑dense, which might overwhelm casual shoppers."
+    "why": "Designed for medium/large scale. Works with 152 products and price point that benefits promotion.",
+    "watchOut": "Extra features may need extra development."
+   },
+   {
+    "theme": {
+     "slug": "superstore",
+     "name": "Superstore",
+     "studio": "Out of the Sandbox",
+     "price": 320,
+     "tagline": "A wholesale theme with epic design flexibility.",
+     "rating": null,
+     "highlights": "A wholesale theme with epic design flexibility. The ultimate Shopify theme for wholesalers and high-volume stores. Build your business with power, performance, and tons of design and layout options. Purchase details Your theme will be delivered as a ZIP file via email, once you complete your purchase. This file will include ALL of Superstore's built-in styles ( Beauty , Fashion , Tech , and Interior ). Compatible with Online Store 2.0",
+     "features": "",
+     "url": "https://outofthesandbox.com/collections/superstore-theme",
+     "image": "https://cdn.shopify.com/s/files/1/0200/7466/files/SS-Interior_dbbbbde6-9740-4fbb-9931-9c559109d180.png?v=1710529390",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 80,
+    "why": "Wholesale-style layout fits 152 items. Value range encourages bundling promos.",
+    "watchOut": "Not as polished for high-end visuals."
    }
   ],
   "engine": "ai",
   "model": "gpt-oss-20b via Pollinations",
-  "ms": 8143,
-  "cachedAt": "2026-11-26T23:10:50.859Z"
+  "ms": 5840,
+  "cachedAt": "2026-11-26T23:24:46.144Z"
+ },
+ "brooklinen.com": {
+  "store": {
+   "domain": "brooklinen.com",
+   "name": "Brooklinen",
+   "description": "Discover Brooklinen’s premium bedding collection. Shop soft sheets, cozy comforters, and soft & firm supportive pillows designed for the best night’s sleep.",
+   "currentTheme": {
+    "name": "Dawn",
+    "studio": null
+   },
+   "productCount": 250,
+   "productCountCapped": true,
+   "priceMin": 9.75,
+   "priceMedian": 199,
+   "priceMax": 738,
+   "vendors": 2,
+   "topTypes": [
+    "Content",
+    "Sheets",
+    "Towels",
+    "Blankets",
+    "Shams"
+   ],
+   "avgVariants": 10.2,
+   "avgImages": 27.6,
+   "hasColorOptions": true,
+   "vertical": "home",
+   "sampleProducts": [
+    {
+     "title": "Mulberry Silk Pillowcase - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/products/1_Silk_Pillowcase_Blush_Silo_ed32ae4d-be5e-4fda-b7fe-a2f480315c67.jpg?v=1719417493",
+     "price": 41.4
+    },
+    {
+     "title": "Linen Shower Curtain - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/files/BKL_26-04_Bath_ShowerCurtain_Linen_PaintedPoppiesLemon_1x_PDP_WO_093cf475-2b5d-4dbe-8ec5-062bb38da13a.jpg?v=1794516667",
+     "price": 65.4
+    },
+    {
+     "title": "Silk Scrunchie Set - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/products/1_BKL_20_Silk_Scrunchies_Large_2_441_MAINxWO_Grey.jpg?v=1762278559",
+     "price": 21
+    },
+    {
+     "title": "Bigtime Robe - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/files/BKL_26-08_Bath_Bigtime_Robe_TandemStripeInAbyss_Flat_1x_PDP_WO.jpg?v=1789509111",
+     "price": 89.4
+    },
+    {
+     "title": "Patchwork Shower Curtain - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/files/BKL_26-04_Bath_ShowerCurtain_Patchwork_BloomsAndStripes_1x_PDP_WO.jpg?v=1776711222",
+     "price": 53.4
+    },
+    {
+     "title": "Weekend Wash Bed Blanket - Last Call",
+     "image": "https://cdn.shopify.com/s/files/1/0951/7126/files/BKL_25-03_Bedding_LightweightGrid_Daylight_Grid_Blankets_1x_PDP_WOgrey_8260477c-4f24-4f90-ba35-2050488c6cf3.jpg?v=1794587373",
+     "price": 83.4
+    }
+   ]
+  },
+  "read": "Brooklinen sells premium home goods, 250+ items with a median price of $199. The theme must handle a large catalog and highlight upscale products.",
+  "picks": [
+   {
+    "theme": {
+     "slug": "enterprise",
+     "name": "Enterprise",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "A new benchmark in store speed and conversion. Sell faster, sell more.",
+     "rating": 90,
+     "highlights": "Sell At Warp Speed! Shop faster, sell more. Handmade from the ground up and built for speed. No external libraries or bloated code - just pure speed. Say Goodbye To Your Apps! Flash messages, sticky Add to Cart, per-page tailored popups. Enterprise has all you need for higher conversions, without the need for apps! 10+ Years Of Experience Who else can say that? Over 100K merchants trust in themes by Clean Canvas. Let our experience be your competitive advantage!",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Account menu   Age verifier Back-in-stock alert Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Ingredients or nutritional information Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Animation Combined listing Shopify Plus   Back-to-top button Breadcrumbs Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/enterprise",
+     "image": "https://cdn.shopify.com/theme-store/039jijfu2t7y33i234154l6600g3.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 95,
+    "why": "Enterprise supports large catalog sizes and speeds up navigation for 250+ products. Its design showcases high-end visuals, matching a $199 median price point.",
+    "watchOut": "The theme’s higher price may strain budget if the store prefers lower overhead."
+   },
+   {
+    "theme": {
+     "slug": "alchemy",
+     "name": "Alchemy",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "Fast, modern, easy set-up. Designed to best showcase your products!",
+     "rating": 98,
+     "highlights": "A high-end storefront We’ve done the design so you don’t have to. Effortlessly create a perfect shopping experience tailored to your customer's needs! 10+ years of experience Who else can say that? We know what works, because we’ve tried it all. We’ve poured our expertise into every corner of this theme. Compete with big retailers Loaded with all the tools you need: SEO, performance, flexible sections, advanced product filters, conversion focus, promo tools and more.",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image rollover Image zoom Ingredients or nutritional information Lookbooks Product options Product tabs Product videos Shipping/delivery information Size chart Slideshow Usage information Combined listing Shopify Plus   Breadcrumbs Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/alchemy",
+     "image": "https://cdn.shopify.com/theme-store/qofdp95082b7al4xtkczk7y1vseh.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "single",
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 90,
+    "why": "Alchemy’s modern layout is tailored for upscale inventories, giving each product a premium presentation. It scales well with 250+ items and aligns with a $199 median price.",
+    "watchOut": "It offers fewer advanced filtering features, which might limit discovery for a broad catalog."
+   },
+   {
+    "theme": {
+     "slug": "atlantic",
+     "name": "Atlantic",
+     "studio": "Pixel Union",
+     "price": 300,
+     "tagline": "Elegant design to showcase high-quality visuals and boost sales",
+     "rating": 96,
+     "highlights": "",
+     "features": " Cart notes In-store pickups Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer FAQ page Product badges Promo banners Quick view Recommended products Stock counter   High-resolution images Image galleries Image rollover Image zoom Product options Product tabs Product videos Size chart Slideshow   Back-to-top button Breadcrumbs Enhanced search Mega menu Product filtering and sorting Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/atlantic",
+     "image": "https://cdn.shopify.com/theme-store/jgi7uw9qne05ac5aaqsqdtuipqfu.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "single",
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 85,
+    "why": "Atlantic’s elegant design is suitable for high-quality home items, supporting a large catalog of 250+ products. Its clean visuals complement a $199 median price point.",
+    "watchOut": "The theme lacks built-in advanced promotion modules, potentially reducing sales lift on offers."
+   }
+  ],
+  "engine": "ai",
+  "model": "gpt-oss-20b via Pollinations",
+  "ms": 7810,
+  "cachedAt": "2026-11-26T23:25:35.220Z"
+ },
+ "kyliecosmetics.com": {
+  "store": {
+   "domain": "kyliecosmetics.com",
+   "name": "Kylie Cosmetics",
+   "description": "Shop Kylie Cosmetics by Kylie Jenner, Kylie Jenner Fragrances and Kylie Skin featuring award-winning makeup, fragrance, and skincare that's clean, vegan, cruelty-free, and dermatologist-tested.",
+   "currentTheme": {
+    "name": "KYLIE",
+    "studio": null
+   },
+   "productCount": 236,
+   "productCountCapped": false,
+   "priceMin": 1,
+   "priceMedian": 19.6,
+   "priceMax": 300,
+   "vendors": 5,
+   "topTypes": [
+    "Bundle",
+    "Set",
+    "Sample",
+    "Fragrance",
+    "Brush"
+   ],
+   "avgVariants": 2.9,
+   "avgImages": 12.8,
+   "hasColorOptions": true,
+   "vertical": "beauty",
+   "sampleProducts": [
+    {
+     "title": "Vanity Case",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/KJC_HOLIDAY_FY26_CORPORATEPOUCH_ANGLE_DTC_v1_CLNT.jpg?v=1793302230",
+     "price": 25
+    },
+    {
+     "title": "Cosmic Holiday Puffer Tote Bag",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/06_KYLIE_COSMIC_TOTEBAG_ANGLE_DTC_v2_CLNT.jpg?v=1785958034",
+     "price": 25
+    },
+    {
+     "title": "Cosmic Holiday Puffer Pouch",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/02_KYLIE_COSMIC_HOLIDAYPOUCH_ANGLE_DTC_v3_CLNT.jpg?v=1785958083",
+     "price": 25
+    },
+    {
+     "title": "Lipstick Holder Stocking Keychain",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/KJC_Q127_WINTERKISSED_GWP_KEYCHAIN_DTC_v1_CLNT.jpg?v=1791924903",
+     "price": 25
+    },
+    {
+     "title": "Kylie’s Governors Awards Look Bundle",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/v1_Governors-Awards_Kylie_s-Looks_1x1_8429f07b-d045-4e94-ae2c-a4fd7a96da6e.jpg?v=1794932405",
+     "price": 238.5
+    },
+    {
+     "title": "Cosmic Travel Case",
+     "image": "https://cdn.shopify.com/s/files/1/0662/4598/4498/files/KJF_HOUSE_24_PP_GWPFragranceHolder_Open.jpg?v=1726095746",
+     "price": 25
+    }
+   ]
+  },
+  "read": "Kylie Cosmetics sells 236 beauty products, mainly bundles, sets, samples, fragrances and brushes. The median price is $19.60, so the catalog is value-priced with a medium size and heavy image and color options.",
+  "picks": [
+   {
+    "theme": {
+     "slug": "beautify",
+     "name": "Beautify",
+     "studio": "Clean Canvas",
+     "price": 430,
+     "tagline": "Where Beauty and Shopify meet!",
+     "rating": 71,
+     "highlights": "Built for Brands Elevate your Beauty & Wellness brand with BEAUTIFY - flexible, fast, and built to help you grow without limits. Crafted to Convert BEAUTIFY delivers unique features you won’t find elsewhere, designed to inspire, convert, and give brands limitless creative power. 16+ Yrs of Top Selling Themes Designed by world-leading theme experts Clean Canvas, who have shaped the success of 100K+ stores worldwide.",
+     "features": " Cart notes Gift wrapping Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Quick view Recently viewed Recommended products Right-to-left Stock counter   Animation Before/after image slider Color swatches High-resolution images Image galleries Image hotspot Image rollover Image zoom Product options Product tabs Product videos Shipping/delivery information Size chart Slideshow Usage information   Breadcrumbs Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/beautify",
+     "image": "https://cdn.shopify.com/theme-store/wft30tnb4exeiw8isfrrgnml7ypn.jpg?width=800",
+     "verticals": [
+      "beauty",
+      "health"
+     ],
+     "catalog": [
+      "single",
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 85,
+    "why": "Built for beauty, it supports the store’s 236 product catalog and its image-rich, color-option focus. The theme’s promotion features cover the low median price, helping move $19.60 items quickly.",
+    "watchOut": "It may need extra customization to match Kylie’s current visual style."
+   },
+   {
+    "theme": {
+     "slug": "canopy",
+     "name": "Canopy",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "Amazon-inspired, feature-rich, and optimized for large scale selling.",
+     "rating": 95,
+     "highlights": "Unrivalled shopping experience Built for large carts and inventories, with a prominent search bar and the option for an always-visible cart sidebar. 10+ years of experience Who else can say that? We know what works, because we’ve tried it all. We’ve poured our expertise into every corner of this theme. Compete with big retailers Loaded with all the tools you need: SEO, speed, performance, flexible sections, predictive search, advanced product filters and much more.",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Account menu   Age verifier Back-in-stock alert Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick order list Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Ingredients or nutritional information Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Animation Combined listing Shopify Plus   Back-to-top button Breadcrumbs Collection page navigation Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended ",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/canopy",
+     "image": "https://cdn.shopify.com/theme-store/enfi1a9ec68edaga4o31vzoyjss4.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 80,
+    "why": "Designed for medium and large catalogs, it handles 236 products with many variants and images. Its Amazon-style search and promo layout align with the value price band for easy browsing.",
+    "watchOut": "The theme may be heavy and need speed tweaks for 12.8 images per product."
+   },
+   {
+    "theme": {
+     "slug": "expanse",
+     "name": "Expanse",
+     "studio": "Archetype Themes",
+     "price": 420,
+     "tagline": "Perfect theme for highly performing large inventory store",
+     "rating": 93,
+     "highlights": "Advanced custom promotion Boost your sales—highlight promos on the homepage, in collection page banners, on large photos in the product page or even in the footer. Boost upsell and cross-sell Inspire customers and increase order value with cart upsell, and relevant products recommendations and promotions throughout your store. Powerful navigation and filter Perfect for large inventory stores, it makes browsing products a hassle-free experience—powerful multi-category sidebar filter, multi-column",
+     "features": " Cart notes In-store pickups Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Before/after image slider Animation Combined listing Shopify Plus   Breadcrumbs Collection page navigation Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header",
+     "url": "https://archetypethemes.co/products/shopify-theme-expanse",
+     "image": "https://cdn.shopify.com/theme-store/2fe1z4d5qet5z1010ut35egyqvnx.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 78,
+    "why": "Optimized for large inventories and promotion-driven sales, it manages the 236-product line well. The layout supports quick add-to-cart for the value median of $19.60.",
+    "watchOut": "It may lack advanced beauty-specific sections that Beautify offers."
+   }
+  ],
+  "engine": "ai",
+  "model": "gpt-oss-20b via Pollinations",
+  "ms": 6237,
+  "cachedAt": "2026-11-26T23:26:20.719Z"
+ },
+ "partakefoods.com": {
+  "store": {
+   "domain": "partakefoods.com",
+   "name": "Partake Foods",
+   "description": "Gluten-free, vegan, non-GMO and free of the top 14 allergens, our super delicious cookies are made with real, healthy, and safe ingredients that everyone can share and enjoy.",
+   "currentTheme": {
+    "name": "Partake (hasmerit.co)",
+    "studio": null
+   },
+   "productCount": 15,
+   "productCountCapped": false,
+   "priceMin": 0.01,
+   "priceMedian": 66,
+   "priceMax": 210,
+   "vendors": 1,
+   "topTypes": [
+    "Cookies",
+    "Grahams"
+   ],
+   "avgVariants": 1.9,
+   "avgImages": 3.9,
+   "hasColorOptions": false,
+   "vertical": "food-drink",
+   "sampleProducts": [
+    {
+     "title": "Girl Scout Sparkables™",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/Girl_Scout_Sparkables_Partake_Cookie.png?v=1787935354",
+     "price": 0
+    },
+    {
+     "title": "Mini Chocolate Chip & Grahams",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/MiniCC_Grahams_12pack_transparent.png?v=1787948576",
+     "price": 54.99
+    },
+    {
+     "title": "Mini Chocolate Chip & Mini Confetti",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/MiniCC_Confetti_12pack_Transparent.png?v=1787947291",
+     "price": 54.99
+    },
+    {
+     "title": "Teeny Tiny Chocolate Chip",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/TT-5pk-Transparent.png?v=1788017238",
+     "price": 35
+    },
+    {
+     "title": "Teeny Tiny Crunchy Chocolate Chip",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/Teeny-Tiny-12oz-Pouch-transparent.png?v=1787942660",
+     "price": 105
+    },
+    {
+     "title": "Crunchy Ginger Snap",
+     "image": "https://cdn.shopify.com/s/files/1/0012/2296/7353/files/Gingersnap-PDP-FOP.png?v=1755905626",
+     "price": 34.99
+    }
+   ]
+  },
+  "read": "Partake Foods sells 15 gluten-free cookie items with a median price of $66, making it a small catalog in the mid price range.",
+  "picks": [
+   {
+    "theme": {
+     "slug": "startup",
+     "name": "Startup",
+     "studio": "Pixel Union",
+     "price": 100,
+     "tagline": "Sleek, minimalist design for single products and small catalogs",
+     "rating": 83,
+     "highlights": "Highlight customer reviews Startup’s highly customizable testimonials section will help build brand trust by putting your customers’ reviews front and center. Makes small catalogs shine Whether your store features a single product or a curated selection of goods, Startup’s design creates the perfect shopping experience. Perfect for direct-to-consumer With Startup, your customers will be able to learn about your brand and shop your products quickly and easily.",
+     "features": " Cart notes In-store pickups Quick buy   Account menu   Age verifier Blogs FAQ page Promo banners Quick view Recommended products   Animation High-resolution images Image zoom Product options Product tabs Product videos Slideshow   Breadcrumbs Mega menu Product filtering and sorting Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/startup",
+     "image": "https://cdn.shopify.com/theme-store/sjo4kts4zc365khksm702pv1owe0.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "single",
+      "small"
+     ]
+    },
+    "fit": 95,
+    "why": "Startup caters to small catalogs and uses a minimalist layout that works well for 15 products. The mid price point of $66 aligns with its promotional capabilities.",
+    "watchOut": "It offers limited customizing for high-end branding features."
+   },
+   {
+    "theme": {
+     "slug": "alchemy",
+     "name": "Alchemy",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "Fast, modern, easy set-up. Designed to best showcase your products!",
+     "rating": 98,
+     "highlights": "A high-end storefront We’ve done the design so you don’t have to. Effortlessly create a perfect shopping experience tailored to your customer's needs! 10+ years of experience Who else can say that? We know what works, because we’ve tried it all. We’ve poured our expertise into every corner of this theme. Compete with big retailers Loaded with all the tools you need: SEO, performance, flexible sections, advanced product filters, conversion focus, promo tools and more.",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image rollover Image zoom Ingredients or nutritional information Lookbooks Product options Product tabs Product videos Shipping/delivery information Size chart Slideshow Usage information Combined listing Shopify Plus   Breadcrumbs Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/alchemy",
+     "image": "https://cdn.shopify.com/theme-store/qofdp95082b7al4xtkczk7y1vseh.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "single",
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 90,
+    "why": "Alchemy is built for single/small catalogs and showcases products cleanly, matching 15 items. Its upscale feel suits the $66 median price, giving a premium look.",
+    "watchOut": "It can be heavier on loading times if many media files are used."
+   },
+   {
+    "theme": {
+     "slug": "motion",
+     "name": "Motion",
+     "studio": "Archetype Themes",
+     "price": 420,
+     "tagline": "Bring your brand to life with animation and video",
+     "rating": 97,
+     "highlights": "Quick Add to Cart Allow customers to quickly view product information, select their size and add to cart or buy instantly without leaving the collection page. Truly mobile-first Fast, compact and thumb-friendly design optimized for mobile SEO. Your store will load quickly and look great on every device, every time. Showcase evolving collections Showcase your collections with beautiful, flexible collage options or highlight a single collection with our callout collection section.",
+     "features": " Cart notes In-store pickups Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Quick view Recommended products Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Before/after image slider Animation Combined listing Shopify Plus   Breadcrumbs Collection page navigation Enhanced search Mega menu Product filtering and sorting Recommended products Sticky header",
+     "url": "https://archetypethemes.co/products/shopify-theme-motion",
+     "image": "https://cdn.shopify.com/theme-store/k1p7zu7ayy2v3xmtdyywg1cqf8xu.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "single",
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 88,
+    "why": "Motion supports small catalogs and adds animated elements that highlight product variety. The animation helps a $66 median price feel dynamic and engaging.",
+    "watchOut": "Animations may distract users looking for quick checkout."
+   }
+  ],
+  "engine": "ai",
+  "model": "gpt-oss-20b via Pollinations",
+  "ms": 5553,
+  "cachedAt": "2026-11-26T23:27:06.540Z"
+ },
+ "thursdayboots.com": {
+  "store": {
+   "domain": "thursdayboots.com",
+   "name": "Thursday Boot Company",
+   "description": "Thursday Boots are built for work & play. With the durability of work boots and sophistication of fashion boots, you'll be ready wherever the day takes you.",
+   "currentTheme": {
+    "name": "Atlantic",
+    "studio": "Pixel Union"
+   },
+   "productCount": 250,
+   "productCountCapped": true,
+   "priceMin": 2.98,
+   "priceMedian": 159,
+   "priceMax": 649,
+   "vendors": 23,
+   "topTypes": [
+    "boots",
+    "Socks",
+    "Shoes",
+    "Shirts",
+    "Jackets"
+   ],
+   "avgVariants": 10.1,
+   "avgImages": 6.3,
+   "hasColorOptions": false,
+   "vertical": "apparel",
+   "sampleProducts": [
+    {
+     "title": "Summit Shirt | Indigo",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/03-1024x1024-Men-SummitShirt-Indigo-100626-Front.jpg?v=1794976139",
+     "price": 98
+    },
+    {
+     "title": "Summit Shirt | Vintage Indigo",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/03-1024x1024-Men-SummitShirt-VintageIndigo-100626-Front.jpg?v=1794976113",
+     "price": 98
+    },
+    {
+     "title": "Oxford Shirt | Chambray Blue",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/02-1024x1024-Men-OxfordShirt-ChambrayBlue-100626-Front.jpg?v=1794978878",
+     "price": 98
+    },
+    {
+     "title": "Oxford Shirt | White & Green",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/02-1024x1024-Men-OxfordShirt-WhiteGreen-100626-Front.jpg?v=1794978838",
+     "price": 98
+    },
+    {
+     "title": "Summit Flannel Shirt | Blue Ridge",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/03-1024x1024-Men-SummitFlannel-BlueRidge-100626-Front.jpg?v=1794977446",
+     "price": 98
+    },
+    {
+     "title": "Wool Car Coat | Black",
+     "image": "https://cdn.shopify.com/s/files/1/0419/1525/files/01-1024x1024-Men-WoolCarCoat-Black-110526-1.jpg?v=1794980602",
+     "price": 349
+    }
+   ]
+  },
+  "read": "Thursday Boot Company sells premium apparel, with over 250 products and a median price of $159. The shop needs a theme that handles a large catalog, showcases high-mid-range items, and delivers a clean, conversion-focused look.",
+  "picks": [
+   {
+    "theme": {
+     "slug": "tailor",
+     "name": "Tailor",
+     "studio": "Pixel Union",
+     "price": 300,
+     "tagline": "Fast, modern, and conversion-focused for apparel brands",
+     "rating": 92,
+     "highlights": "Built for fashion merchants Shoppable images and cart cross-sell transform your shop into a personal stylist and apparel shop essentials like a size chart are built-in. Make browsing enjoyable Customizable product labels, quick add-to-cart, and color swatches on product cards make browsing your catalogue easy and enjoyable. Unlimited growth Expand your catalog without compromising your customer experience with mega menus, live search, and extensive collections capabilities.",
+     "features": " Cart notes In-store pickups Quick buy Slide-out cart   Age verifier Blogs Cross-selling EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Quick view Recommended products Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image hotspot Image zoom Lookbooks Product options Product tabs Product videos Size chart   Collection page navigation Enhanced search Mega menu Product filtering and sorting Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/tailor",
+     "image": "https://cdn.shopify.com/theme-store/jwz86oi3qayf6ozbr087fppa9ej9.jpg?width=800",
+     "verticals": [
+      "apparel"
+     ],
+     "catalog": [
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 90,
+    "why": "Tailor is built for apparel and supports large catalogs. Its design highlights premium products, matching the store’s $159 median and 250+ inventory.",
+    "watchOut": "It may lack advanced filtering options that some shoppers expect for very large catalogs."
+   },
+   {
+    "theme": {
+     "slug": "empire",
+     "name": "Empire",
+     "studio": "Pixel Union",
+     "price": 360,
+     "tagline": "Optimized for big catalogs with advanced filters and shoppable images",
+     "rating": 79,
+     "highlights": "Built to maximize conversions Product comparison and a bold mega menu help shoppers discover more across jewelry, cosmetics, and apparel stores to boost conversions Boost your order value Sleek, fast-loading sections spotlight your fashion, beauty, and home decor catalog on any device to maximize order value Customizable for any catalog Modern, customizable design with multi-currency and multi-language support scales with dropshipping, wholesale, and subscription brands",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo tiles Quick order list Quick view Recently viewed Recommended products Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image hotspot Image rollover Image zoom Product options Product tabs Product videos Shipping/delivery information Slideshow   Back-to-top button Breadcrumbs Collection page navigation Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/empire",
+     "image": "https://cdn.shopify.com/theme-store/ssha4t7g0yau5o5im3726ii1l295.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 85,
+    "why": "Empire supports large catalog sizes with advanced filters and shoppable images. It’s versatile for high-price apparel and can pull more product details for a $159 median range.",
+    "watchOut": "The theme’s features may add complexity during setup and could increase load times if not optimized."
+   },
+   {
+    "theme": {
+     "slug": "enterprise",
+     "name": "Enterprise",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "A new benchmark in store speed and conversion. Sell faster, sell more.",
+     "rating": 90,
+     "highlights": "Sell At Warp Speed! Shop faster, sell more. Handmade from the ground up and built for speed. No external libraries or bloated code - just pure speed. Say Goodbye To Your Apps! Flash messages, sticky Add to Cart, per-page tailored popups. Enterprise has all you need for higher conversions, without the need for apps! 10+ Years Of Experience Who else can say that? Over 100K merchants trust in themes by Clean Canvas. Let our experience be your competitive advantage!",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Account menu   Age verifier Back-in-stock alert Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Ingredients or nutritional information Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Animation Combined listing Shopify Plus   Back-to-top button Breadcrumbs Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/enterprise",
+     "image": "https://cdn.shopify.com/theme-store/039jijfu2t7y33i234154l6600g3.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 80,
+    "why": "Enterprise is built for large inventories and fast performance, fitting the 250-plus product count. Its speed benefits shoppers looking at premium, $159 medians without lag.",
+    "watchOut": "The theme is relatively expensive at $420, and customization might require deeper technical knowledge."
+   }
+  ],
+  "engine": "ai",
+  "model": "gpt-oss-20b via Pollinations",
+  "ms": 12602,
+  "cachedAt": "2026-11-26T23:28:00.404Z"
+ },
+ "allbirds.com": {
+  "store": {
+   "domain": "allbirds.com",
+   "name": "Allbirds",
+   "description": "Allbirds: The world’s most comfortable shoes, flats, and clothing made with natural materials like merino wool and eucalyptus. FREE shipping & returns.",
+   "currentTheme": {
+    "name": "allbirds-theme",
+    "studio": null
+   },
+   "productCount": 250,
+   "productCountCapped": true,
+   "priceMin": 6,
+   "priceMedian": 81,
+   "priceMax": 500,
+   "vendors": 1,
+   "topTypes": [
+    "Shoes",
+    "Socks",
+    "Apparel",
+    "Gift Cards"
+   ],
+   "avgVariants": 10.6,
+   "avgImages": 4.3,
+   "hasColorOptions": false,
+   "vertical": "apparel",
+   "sampleProducts": [
+    {
+     "title": "Men's Wool Runner NZ Mid Waterproof - Natural Black (Natural Black Sole)",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/A12032_25Q3_Wool-Runner-NZ-Mid-Waterproof-Natural-Black-Natural-Black-Sole_PDP_LEFT_91ddb877-4dbc-4ba0-a29d-8277624bef25.png?v=1757723606",
+     "price": 112
+    },
+    {
+     "title": "Women's Tree Breezer - Warm Camel (Dark Anthracite Sole)",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/A12336_26Q1_Tree-Breezer-Warm-Caramel-Dark-Anthracite_PDP_LEFT.png?v=1765244451",
+     "price": 73.5
+    },
+    {
+     "title": "Women's Tree Glider - Warm White/Multi (Natural White Sole)",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/A12366_26Q1_Tree-Glider-Warm-White-Multi-Natural-White_PDP_LEFT.png?v=1765305013",
+     "price": 98
+    },
+    {
+     "title": "Trino® Sprinters - Cushioned - Navy Night",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/PPS1ASH1_SOCK_TOE_GLOBAL_TRINO_PACERS-LOW_NAVY_NIGHT_f58e5f75-8a70-4466-a566-1b1750465ff9.png?v=1795460841",
+     "price": 7.5
+    },
+    {
+     "title": "Anytime Crew Sock - Spice (Blizzard Sole)",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/A12701_front_1600x1600_3883d7c1-2191-401d-9a48-062aa9343b2e.png?v=1770399757",
+     "price": 9
+    },
+    {
+     "title": "Anytime Ankle Sock - Natural Grey Heather",
+     "image": "https://cdn.shopify.com/s/files/1/1104/4168/files/A12163_25Q3_Anytime-Ankle-Sock-Natural-Grey-Heather_PDP_F.png?v=1770421448",
+     "price": 8
+    }
+   ]
+  },
+  "read": "Allbirds sells 250+ apparel items with a median price of $81. The store needs a theme that supports large catalogs, apparel focus, and mid-price merchandising.",
+  "picks": [
+   {
+    "theme": {
+     "slug": "tailor",
+     "name": "Tailor",
+     "studio": "Pixel Union",
+     "price": 300,
+     "tagline": "Fast, modern, and conversion-focused for apparel brands",
+     "rating": 92,
+     "highlights": "Built for fashion merchants Shoppable images and cart cross-sell transform your shop into a personal stylist and apparel shop essentials like a size chart are built-in. Make browsing enjoyable Customizable product labels, quick add-to-cart, and color swatches on product cards make browsing your catalogue easy and enjoyable. Unlimited growth Expand your catalog without compromising your customer experience with mega menus, live search, and extensive collections capabilities.",
+     "features": " Cart notes In-store pickups Quick buy Slide-out cart   Age verifier Blogs Cross-selling EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Quick view Recommended products Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image hotspot Image zoom Lookbooks Product options Product tabs Product videos Size chart   Collection page navigation Enhanced search Mega menu Product filtering and sorting Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/tailor",
+     "image": "https://cdn.shopify.com/theme-store/jwz86oi3qayf6ozbr087fppa9ej9.jpg?width=800",
+     "verticals": [
+      "apparel"
+     ],
+     "catalog": [
+      "small",
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 92,
+    "why": "Tailor is built for apparel and handles large catalogs. It matches the store’s 250+ products and mid-range pricing, showcasing items with fast, conversion-focused features.",
+    "watchOut": "The theme is priced $300, a modest investment that may be higher than some simpler options."
+   },
+   {
+    "theme": {
+     "slug": "canopy",
+     "name": "Canopy",
+     "studio": "Clean Canvas",
+     "price": 420,
+     "tagline": "Amazon-inspired, feature-rich, and optimized for large scale selling.",
+     "rating": 95,
+     "highlights": "Unrivalled shopping experience Built for large carts and inventories, with a prominent search bar and the option for an always-visible cart sidebar. 10+ years of experience Who else can say that? We know what works, because we’ve tried it all. We’ve poured our expertise into every corner of this theme. Compete with big retailers Loaded with all the tools you need: SEO, speed, performance, flexible sections, predictive search, advanced product filters and much more.",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Sign in with Shop Slide-out cart Sticky cart   Account menu   Age verifier Back-in-stock alert Blogs Countdown timer Cross-selling Customizable contact form EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo popups Promo tiles Quick order list Quick view Recently viewed Recommended products Right-to-left Stock counter Trust badges   Usage information Slideshow Size chart Shipping/delivery information Product videos Product tabs Product options Lookbooks Ingredients or nutritional information Image zoom Image rollover Image hotspot Image galleries High-resolution images Color swatches Animation Combined listing Shopify Plus   Back-to-top button Breadcrumbs Collection page navigation Enhanced search Infinite scroll Mega menu Product filtering and sorting Recently viewed Recommended ",
+     "url": "https://www.cleancanvas.co.uk/shopify-themes/canopy",
+     "image": "https://cdn.shopify.com/theme-store/enfi1a9ec68edaga4o31vzoyjss4.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 88,
+    "why": "Canopy is optimized for large inventories and includes a prominent search bar, useful for 250+ products. Its design supports mid-priced apparel with clear product displays and quick navigation.",
+    "watchOut": "Canopy’s feature set is hefty and may require extra setup time to fine-tune for apparel branding."
+   },
+   {
+    "theme": {
+     "slug": "empire",
+     "name": "Empire",
+     "studio": "Pixel Union",
+     "price": 360,
+     "tagline": "Optimized for big catalogs with advanced filters and shoppable images",
+     "rating": 79,
+     "highlights": "Built to maximize conversions Product comparison and a bold mega menu help shoppers discover more across jewelry, cosmetics, and apparel stores to boost conversions Boost your order value Sleek, fast-loading sections spotlight your fashion, beauty, and home decor catalog on any device to maximize order value Customizable for any catalog Modern, customizable design with multi-currency and multi-language support scales with dropshipping, wholesale, and subscription brands",
+     "features": " Cart notes In-store pickups Pre-order Quick buy Slide-out cart   Account menu   Age verifier Blogs Countdown timer Cross-selling EU translations (EN, FR, IT, DE, ES) FAQ page In-menu promos Press coverage Product badges Promo banners Promo tiles Quick order list Quick view Recently viewed Recommended products Stock counter Trust badges   Animation Color swatches High-resolution images Image galleries Image hotspot Image rollover Image zoom Product options Product tabs Product videos Shipping/delivery information Slideshow   Back-to-top button Breadcrumbs Collection page navigation Enhanced search Mega menu Product filtering and sorting Recently viewed Recommended products Sticky header Swatch filters",
+     "url": "https://pixelunion.net/products/empire",
+     "image": "https://cdn.shopify.com/theme-store/ssha4t7g0yau5o5im3726ii1l295.jpg?width=800",
+     "verticals": [],
+     "catalog": [
+      "medium",
+      "large"
+     ]
+    },
+    "fit": 86,
+    "why": "Empire supports large catalogs and advanced filters, ideal for 250+ varied items. It offers shoppable images that fit a mid-priced collection with an average median of $81.",
+    "watchOut": "Empire is generic for any vertical, so it may lack apparel-specific styling cues."
+   }
+  ],
+  "engine": "ai",
+  "model": "gpt-oss-20b via Pollinations",
+  "ms": 7013,
+  "cachedAt": "2026-11-26T23:28:41.680Z"
  }
 };
