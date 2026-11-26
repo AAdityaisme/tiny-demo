@@ -3,7 +3,6 @@
  * server already has them. Otherwise the AI re-rank runs in this order: this visitor's saved result (localStorage,
  * 24h), the browser lane (refineWithAi, rate-limited per visitor IP), then the server lane (POST /api/refine).
  * When both lanes are busy the rule picks stay, a countdown runs, and the AI is retried once automatically.
- * lib/match.ts MatchFailure carries no error code, so 422 kinds are told apart by their message.
  * All API and AI text goes into the DOM through textContent.
  */
 import { AiUnavailable, normalizeDomain, refineWithAi } from "../lib/match.ts";
@@ -231,12 +230,10 @@ function showReading(domain: string): void {
   announce(`Reading ${domain}`);
 }
 
-function storeError(status: number, message: string): FitError {
-  if (status === 400) return new FitError("invalid", message);
-  if (status === 422 && /catalog/i.test(message)) return new FitError("not-shopify", message);
-  if (status === 422 && /no public products/i.test(message)) return new FitError("empty", message);
-  if (status === 422) return new FitError("unreachable", message);
-  return new FitError("server", message);
+function storeError(status: number, body: MatchError | null): FitError {
+  const message = body?.error ?? "";
+  if (body?.code) return new FitError(body.code, message);
+  return new FitError(status === 400 ? "invalid" : "server", message);
 }
 
 async function mockMatch(): Promise<MatchResult> {
@@ -262,7 +259,7 @@ async function fetchMatch(url: string): Promise<MatchResult> {
   }
   const body = (await res.json().catch(() => null)) as MatchResult | MatchError | null;
   if (res.ok && body && !("error" in body)) return body;
-  throw storeError(res.status, body && "error" in body ? body.error : "");
+  throw storeError(res.status, body && "error" in body ? body : null);
 }
 
 async function browserAi(base: MatchResult): Promise<MatchResult> {

@@ -2,7 +2,7 @@
  * Reads a Shopify store's public catalog and picks the best-fitting themes from Tiny's four theme studios.
  * The AI step uses Pollinations' free, keyless text API; when it fails, a rule-based scorer answers instead.
  */
-import type { CatalogSize, MatchResult, Pick, StoreProfile, Theme, Vertical } from "./types.js";
+import type { FailureCode, CatalogSize, MatchResult, Pick, StoreProfile, Theme, Vertical } from "./types.js";
 
 interface ProductText {
   title: string;
@@ -191,6 +191,8 @@ export const VERTICAL_LABEL: Record<Vertical, string> = {
   "art-media": "art and media",
 };
 
+const usd = (n: number) => `$${Number.isInteger(n) ? n : n.toFixed(2)}`;
+
 const countLabel = (s: StoreProfile) => (s.productCountCapped ? "250+" : String(s.productCount));
 
 /** Deterministic scorer: category fit, catalog size fit and price point first, then media signals and rating. Reasons cite the store's own numbers. */
@@ -213,9 +215,9 @@ export function ruleScore(s: StoreProfile, t: Theme): { score: number; reasons: 
   if (specialist && (size === "single" || size === "small")) add(16, `It's made for small catalogs like your ${count} products.`);
   const band = priceBand(s.priceMedian);
   const position = POSITIONING[t.slug];
-  if (position === "upscale" && band === "premium") add(12, `It's styled for high-end retail, and your median price is $${s.priceMedian}.`);
+  if (position === "upscale" && band === "premium") add(12, `It's styled for high-end retail, and your median price is ${usd(s.priceMedian)}.`);
   if (position === "upscale" && band === "value") add(-8);
-  if (position === "promo" && band === "value") add(10, `It's built around promotions and bundles, which suits your $${s.priceMedian} median price.`);
+  if (position === "promo" && band === "value") add(10, `It's built around promotions and bundles, which suits your ${usd(s.priceMedian)} median price.`);
   if (position === "promo" && band === "premium") add(-8);
   if (s.vendors > 15 && has(t, /wholesal|high-volume/i)) add(10, `It handles high-volume, many-brand stores, and you carry ${s.vendors} vendors.`);
   if (s.avgImages >= 5 && has(t, /visual|imagery|image-first|gallery|galleries/i)) add(8, `It leans on imagery, and your products average ${s.avgImages} photos each.`);
@@ -224,17 +226,26 @@ export function ruleScore(s: StoreProfile, t: Theme): { score: number; reasons: 
   return { score: Math.max(5, Math.min(97, Math.round(score))), reasons };
 }
 
+/** The top three eligible themes by rule score. Each pick's "why" uses reasons the earlier picks didn't, so no two read the same. */
 export function rulePicks(s: StoreProfile, themes: Theme[]): Pick[] {
+  const used = new Set<string>();
   return eligibleThemes(s, themes)
     .map((t) => ({ t, ...ruleScore(s, t) }))
     .sort((a, b) => b.score - a.score || (b.t.rating ?? 0) - (a.t.rating ?? 0) || a.t.slug.localeCompare(b.t.slug))
     .slice(0, 3)
-    .map(({ t, score, reasons }) => ({
-      theme: t,
-      fit: score,
-      why: reasons.slice(0, 2).join(" ") || `It's a well-rated all-rounder for a ${countLabel(s)}-product store at a $${s.priceMedian} median price.`,
-      watchOut: "Scored by rules, not AI. Preview it on your own products before buying.",
-    }));
+    .map(({ t, score, reasons }) => {
+      const fresh = reasons.filter((r) => !used.has(r)).slice(0, 2);
+      fresh.forEach((r) => used.add(r));
+      const pitch = `${t.studio} pitches it as: "${clean(t.tagline).replace(/[.!]+$/, "")}."`;
+      const fallback = `It's a well-rated all-rounder for a ${countLabel(s)}-product store at a ${usd(s.priceMedian)} median price.`;
+      const lead = fresh.length ? fresh : [reasons[0] ?? fallback];
+      return {
+        theme: t,
+        fit: score,
+        why: (fresh.length >= 2 ? fresh : [...lead, pitch]).join(" "),
+        watchOut: "Scored by rules, not AI. Preview it on your own products before buying.",
+      };
+    });
 }
 
 const SIZE_RANGE: Record<CatalogSize, string> = { single: "1 to 3 products", small: "4 to 50 products", medium: "51 to 249 products", large: "250+ products" };
@@ -312,7 +323,11 @@ export function parseAi(text: string, themes: Theme[]): { read: string; picks: P
   return picks.length ? { read: clean(data.read), picks: picks.slice(0, 3) } : null;
 }
 
-const clean = (s: string) => s.replace(/\s*[—–]\s*/g, ", ").trim();
+const clean = (s: string) =>
+  s
+    .replace(/\s*[—–]\s*/g, ", ")
+    .replace(/\b(food-drink|wine-spirits|sports-outdoor|kids-pets|art-media)\b/g, (slug) => VERTICAL_LABEL[slug as Vertical])
+    .trim();
 
 async function fetchText(url: string, ms: number): Promise<{ ok: boolean; status: number; text: string }> {
   const res = await fetch(url, { headers: { "User-Agent": UA, Accept: "*/*" }, redirect: "follow", signal: AbortSignal.timeout(ms) });
@@ -347,9 +362,11 @@ async function askAi(prompt: string): Promise<string> {
 
 export class MatchFailure extends Error {
   readonly status: number;
-  constructor(message: string, status: number) {
+  readonly code: FailureCode;
+  constructor(message: string, status: number, code: FailureCode) {
     super(message);
     this.status = status;
+    this.code = code;
   }
 }
 
@@ -357,25 +374,25 @@ export class MatchFailure extends Error {
 export async function readStore(input: string, themes: Theme[]): Promise<MatchResult> {
   const started = Date.now();
   const domain = normalizeDomain(input);
-  if (!domain) throw new MatchFailure("That doesn't look like a store URL. Try something like allbirds.com.", 400);
+  if (!domain) throw new MatchFailure("That doesn't look like a store URL. Try something like allbirds.com.", 400, "invalid");
   const [home, prods] = await Promise.all([
     fetchText(`https://${domain}/`, 10_000).catch(() => null),
     fetchText(`https://${domain}/products.json?limit=250`, 12_000).catch(() => null),
   ]);
-  if (!home?.ok) throw new MatchFailure(`Couldn't load ${domain}. Check the address.`, 422);
+  if (!home?.ok) throw new MatchFailure(`Couldn't load ${domain}. Check the address.`, 422, "unreachable");
   let products: ShopifyProduct[];
   try {
     products = (JSON.parse(prods?.text ?? "") as { products: ShopifyProduct[] }).products;
     if (!Array.isArray(products)) throw new Error();
   } catch {
-    throw new MatchFailure(`${domain} doesn't expose a public Shopify catalog, so it's either not on Shopify or it's locked down.`, 422);
+    throw new MatchFailure(`${domain} doesn't expose a public Shopify catalog, so it's either not on Shopify or it's locked down.`, 422, "not-shopify");
   }
-  if (!products.length) throw new MatchFailure(`${domain} has no public products to read.`, 422);
+  if (!products.length) throw new MatchFailure(`${domain} has no public products to read.`, 422, "empty");
 
   const store = buildProfile(domain, home.text, products, themes);
   return {
     store,
-    read: `${store.name} lists ${store.productCountCapped ? "250+" : store.productCount} products across ${store.vendors} vendor${store.vendors === 1 ? "" : "s"}, with a median price of $${store.priceMedian}.`,
+    read: `${store.name} lists ${store.productCountCapped ? "250+" : store.productCount} products across ${store.vendors} vendor${store.vendors === 1 ? "" : "s"}, with a median price of ${usd(store.priceMedian)}.`,
     picks: rulePicks(store, themes),
     engine: "rules",
     model: "rule-based scorer",

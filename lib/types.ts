@@ -60,8 +60,12 @@ export interface MatchResult {
   cachedAt?: string;
 }
 
+/** Why a store couldn't be read, so the page can pick its copy without parsing messages. */
+export type FailureCode = "invalid" | "unreachable" | "not-shopify" | "empty";
+
 export interface MatchError {
   error: string;
+  code?: FailureCode;
   /** On 429 from /api/refine: seconds until the server's AI lane is free again. */
   retryAfterSec?: number;
 }

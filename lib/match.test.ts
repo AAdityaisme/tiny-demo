@@ -135,3 +135,16 @@ test("a 402 from the keyless tier surfaces as a rate limit with its Retry-After"
     fetchMock.mock.restore();
   }
 });
+
+test("rule picks never repeat a why, and prices read as money", () => {
+  const picks = rulePicks(profile({ ...coffee, productCount: 152, priceMedian: 32.5, vendors: 17 }), THEMES);
+  assert.equal(new Set(picks.map((p) => p.why)).size, 3);
+  assert.ok(picks.some((p) => p.why.includes("$32.50")));
+  assert.ok(picks.every((p) => !p.why.includes("$32.5 ")));
+});
+
+test("AI text never shows a raw vertical label", () => {
+  const ai = parseAi('{"read":"A food-drink brand.","picks":[{"theme":"Empire","fit":80,"why":"Fits food-drink stores.","watchOut":"o"}]}', THEMES);
+  assert.equal(ai?.read, "A food and drink brand.");
+  assert.equal(ai?.picks[0].why, "Fits food and drink stores.");
+});
