@@ -198,7 +198,8 @@ export const THEMES: Theme[] = [
   "url": "https://www.cleancanvas.co.uk/shopify-themes/beautify",
   "image": "https://cdn.shopify.com/theme-store/wft30tnb4exeiw8isfrrgnml7ypn.jpg?width=800",
   "verticals": [
-   "beauty"
+   "beauty",
+   "health"
   ],
   "catalog": [
    "single",
@@ -239,8 +240,6 @@ export const THEMES: Theme[] = [
   "image": "https://cdn.shopify.com/theme-store/039jijfu2t7y33i234154l6600g3.jpg?width=800",
   "verticals": [],
   "catalog": [
-   "single",
-   "small",
    "medium",
    "large"
   ]
@@ -298,8 +297,7 @@ export const THEMES: Theme[] = [
   "catalog": [
    "single",
    "small",
-   "medium",
-   "large"
+   "medium"
   ]
  },
  {
@@ -500,6 +498,7 @@ export const THEMES: Theme[] = [
    "wine-spirits"
   ],
   "catalog": [
+   "small",
    "medium",
    "large"
   ]
