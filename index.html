@@ -4,73 +4,112 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fitting Room</title>
-    <meta name="description" content="Paste a Shopify store URL and get the three best-fitting themes from Tiny's four theme studios, reasoned from your real catalog. An unofficial demo." />
+    <meta name="description" content="Paste a Shopify store. Fitting Room reads its public catalog and current theme, then picks the three best fits from 29 premium themes by Tiny’s four theme studios. An unofficial demo." />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f5f2ec" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f2f4f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f2337" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fitting Room" />
+    <meta property="og:url" content="https://fitting-room.vercel.app/" />
+    <meta property="og:title" content="Fitting Room: fit your store to the right theme" />
+    <meta property="og:description" content="Paste a Shopify store. Get the three best fits from 29 premium themes by Tiny’s four theme studios, each with the reason and the catch." />
+    <meta property="og:image" content="https://fitting-room.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fitting Room. 29 themes on four studio shelves, three of them marked as the fit." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fitting Room: fit your store to the right theme" />
+    <meta name="twitter:description" content="Paste a Shopify store. Get the three best fits from 29 premium themes by Tiny’s four theme studios." />
+    <meta name="twitter:image" content="https://fitting-room.vercel.app/og.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://cdn.shopify.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <header class="site-header wrap">
-      <a class="wordmark" href="/">Fitting Room</a>
-      <p class="tagline">An unofficial demo for Tiny's Shopify theme studios</p>
+    <header class="masthead">
+      <div class="frame masthead-row">
+        <a class="wordmark" href="/">
+          <svg class="wordmark-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path class="mark-shelf" d="M2 20.5h20" />
+            <rect x="3.5" y="9" width="4.5" height="10" />
+            <rect class="mark-fit" x="9.75" y="4" width="4.5" height="15" />
+            <rect x="16" y="11" width="4.5" height="8" />
+          </svg>
+          <span>Fitting Room</span>
+        </a>
+        <p class="masthead-note">An unofficial demo for Tiny’s Shopify theme studios</p>
+      </div>
     </header>
 
     <main>
-      <section class="hero wrap" aria-labelledby="hero-title">
-        <h1 id="hero-title">Find the theme that fits the store you already run.</h1>
-        <p class="lede">
-          Paste your Shopify store address. Fitting Room reads your public catalog, spots your current theme,
-          and picks the three best fits from 29 premium themes across four studios.
-        </p>
+      <section class="hero frame" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">Fit your store to the right theme.</h1>
+          <p class="lede">
+            Paste a Shopify store. Fitting Room reads its public catalog and current theme, then picks the three best
+            fits from 29 premium themes by Tiny’s four studios, each with the reason and the catch.
+          </p>
 
-        <form id="match-form" class="match-form" novalidate>
-          <label for="store-url" class="field-label">Your store URL</label>
-          <div class="field-row">
-            <input
-              id="store-url"
-              name="url"
-              type="text"
-              inputmode="url"
-              autocomplete="url"
-              autocapitalize="off"
-              spellcheck="false"
-              placeholder="yourstore.com"
-              aria-describedby="form-hint"
-              required
-            />
-            <button id="submit-btn" type="submit" class="btn-primary">Find my theme</button>
+          <form id="match-form" class="fit-form" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="store-url">Shopify store address</label>
+                <input
+                  id="store-url"
+                  name="url"
+                  type="text"
+                  inputmode="url"
+                  autocomplete="url"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  placeholder="yourstore.com"
+                  aria-describedby="form-hint"
+                  required
+                />
+              </div>
+              <button id="submit-btn" type="submit" class="btn-ink">Find my theme</button>
+            </div>
+            <p id="form-hint" class="form-hint" role="alert" hidden></p>
+          </form>
+
+          <div class="examples">
+            <p class="examples-label" id="examples-label">Or try a real store</p>
+            <div id="example-chips" class="chips" role="group" aria-labelledby="examples-label"></div>
           </div>
-          <p id="form-hint" class="form-hint" role="alert" hidden></p>
-        </form>
-
-        <div class="examples">
-          <span class="examples-label" id="examples-label">Or try a real store</span>
-          <div id="example-chips" class="chips" role="group" aria-labelledby="examples-label"></div>
         </div>
+
+        <figure class="wall" aria-labelledby="wall-caption">
+          <div id="shelves" class="shelves"></div>
+          <figcaption id="wall-caption" class="wall-caption">
+            <span class="wall-default">All 29 themes it chooses from, shelved by studio.</span>
+            <span class="wall-live" aria-hidden="true"></span>
+          </figcaption>
+        </figure>
       </section>
 
-      <section id="results" class="results wrap" aria-label="Results"></section>
+      <section id="results" class="results frame" aria-label="Results"></section>
       <p id="announcer" class="visually-hidden" role="status" aria-live="polite"></p>
 
-      <section class="why wrap" aria-labelledby="why-title">
-        <h2 id="why-title">Why this exists</h2>
+      <section class="notes frame" aria-labelledby="notes-title">
+        <h2 id="notes-title">Why this exists</h2>
         <ul>
-          <li>Tiny's four studios sell 29 premium Shopify themes to one shared audience of 700k+ merchants.</li>
+          <li>Tiny’s four studios sell 29 premium Shopify themes to one shared audience of 700k+ merchants.</li>
           <li>The current finder is a filter quiz over a handful of Pixel Union themes, and it asks for a larger screen.</li>
           <li>Fitting Room reads the real store instead, then weighs all 29 themes against what it sells.</li>
         </ul>
       </section>
     </main>
 
-    <footer class="site-footer wrap">
-      <p>
-        Built in an afternoon by Aadi Sharma with an agent swarm. Not affiliated with Tiny.
-        <a href="https://github.com/AAdityaisme/tiny-demo" target="_blank" rel="noopener">Source on GitHub</a>
-      </p>
+    <footer class="colophon frame">
+      <p>Built in an afternoon by Aadi Sharma with an agent swarm. Not affiliated with Tiny.</p>
+      <a href="https://github.com/AAdityaisme/tiny-demo" target="_blank" rel="noopener">Source on GitHub<span class="visually-hidden"> (opens in a new tab)</span></a>
     </footer>
 
     <script type="module" src="/src/main.ts"></script>
