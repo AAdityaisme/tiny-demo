@@ -19,7 +19,6 @@
   --focus: #2c5994;
   --btn: #121821;
   --on-btn: #f2f4f3;
-  --hatch: #121821;
   --r: 3px;
   --gutter: 16px;
   --font: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -45,7 +44,6 @@
     --focus: #9fc4ef;
     --btn: #eaf1f8;
     --on-btn: #0f2337;
-    --hatch: #eaf1f8;
     color-scheme: dark;
   }
 }
@@ -727,7 +725,7 @@ input {
 .draft-lines {
   display: grid;
   gap: 18px;
-  animation: draft 2.8s linear both;
+  animation: draft 1.6s var(--ease-out) both;
 }
 
 @keyframes draft {
@@ -1158,15 +1156,18 @@ input {
 }
 
 .read-pending {
-  flex: 1 1 auto;
-  min-height: 2.9em;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent calc(1.45em - 1px),
-    var(--blue) calc(1.45em - 1px),
-    var(--blue) 1.45em
-  );
+  display: grid;
+  gap: calc(1.45em - 1px);
+  padding-top: calc(1.45em - 1px);
+}
+
+.read-pending span {
+  height: 1px;
+  border-top: 1px dashed var(--blue);
+}
+
+.read-pending span:last-child {
+  width: 62%;
 }
 
 .read.is-inked .read-text {
@@ -1327,6 +1328,9 @@ input {
   .ai-status .btn-line {
     padding: 0 12px;
   }
+  .status-more {
+    display: none;
+  }
 }
 
 /* Where the picks sit among all 29 */
@@ -1393,9 +1397,15 @@ input {
   color: var(--paper);
 }
 
-.slot.is-now {
+.slot[data-rank="1"] {
+  background: var(--marker);
   border-color: var(--ink);
-  background: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 5px);
+  color: var(--on-marker);
+}
+
+.slot.is-now {
+  border: 2px solid var(--ink);
+  border-bottom: 0;
 }
 
 .strip-studio {
@@ -1601,9 +1611,9 @@ input {
   position: relative;
   height: 14px;
   background:
-    repeating-linear-gradient(90deg, var(--control) 0 1px, transparent 1px 10%) left bottom / 100% 6px no-repeat,
+    linear-gradient(var(--control), var(--control)) 50% 100% / 1px 8px no-repeat,
     linear-gradient(var(--control), var(--control)) left bottom / 100% 1px no-repeat;
-  border-right: 1px solid var(--control);
+  border-inline: 1px solid var(--control);
 }
 
 .fit-fill {

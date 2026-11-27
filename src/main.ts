@@ -237,8 +237,8 @@ function drawWall(): void {
     ...STUDIOS.map((studio) => {
       const themes = THEMES.filter((t) => t.studio === studio);
       return h(
-        "section",
-        { class: "shelf", "aria-label": `${studio}, ${themes.length} themes` },
+        "div",
+        { class: "shelf", role: "group", "aria-label": `${studio}, ${themes.length} themes` },
         h("ul", { class: "shelf-row" }, ...themes.map(facing)),
         h(
           "p",
@@ -544,7 +544,7 @@ function catalogStrip(r: MatchResult): HTMLElement {
   return h(
     "div",
     { class: "strip" },
-    h("p", { class: "strip-caption" }, now ? "Where the picks sit among all 29 themes. Hatched: the theme the store runs now." : "Where the picks sit among all 29 themes."),
+    h("p", { class: "strip-caption" }, now ? "Where the picks sit among all 29 themes. Outlined in ink: the theme the store runs now." : "Where the picks sit among all 29 themes."),
     h(
       "div",
       { class: "strip-shelves", "aria-hidden": "true" },
@@ -557,7 +557,7 @@ function catalogStrip(r: MatchResult): HTMLElement {
             { class: "strip-slots" },
             ...THEMES.filter((t) => t.studio === studio).map((t) => {
               const n = rank.get(t.slug);
-              return h("span", { class: `slot${n ? " is-pick" : ""}${t === now ? " is-now" : ""}` }, n ? String(n) : "");
+              return h("span", { class: `slot${n ? " is-pick" : ""}${t === now ? " is-now" : ""}`, "data-rank": n ? String(n) : "" }, n ? String(n) : "");
             }),
           ),
           h("span", { class: "strip-studio" }, studio),
@@ -576,7 +576,7 @@ function readBlock(r: MatchResult, pending: boolean, reserved = pending): HTMLEl
       "div",
       { class: "read-body" },
       h("p", { class: "read-text" }, r.read),
-      pending ? h("div", { class: "read-pending", "aria-hidden": "true" }) : null,
+      pending ? h("div", { class: "read-pending", "aria-hidden": "true" }, h("span"), h("span"), h("span")) : null,
     ),
   );
 }
@@ -604,6 +604,7 @@ function statusBar(base: MatchResult, id: number, status: Status): HTMLElement {
     status.autoRetry ? "Trying again in " : "It frees up in ",
     count,
     ".",
+    h("span", { class: "status-more" }, " The rule-based picks hold until then."),
   );
   const now = h("button", { type: "button", class: "btn-line" }, icon("retry"), "Try AI now");
   now.addEventListener("click", () => void refine(base, id, true));
