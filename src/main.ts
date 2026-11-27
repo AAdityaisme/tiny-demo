@@ -35,6 +35,7 @@ const EXAMPLES: { domain: string; name: string; kind: string; photo: string }[] 
 ];
 
 const STUDIOS: Studio[] = ["Pixel Union", "Archetype Themes", "Clean Canvas", "Out of the Sandbox"];
+const SHELVES: Studio[][] = [["Pixel Union", "Archetype Themes"], ["Clean Canvas"], ["Out of the Sandbox"]];
 
 const VERTICALS: Record<Vertical, string> = {
   apparel: "Apparel",
@@ -232,23 +233,25 @@ function facing(theme: Theme): HTMLLIElement {
   return li;
 }
 
-function drawWall(): void {
-  shelves.replaceChildren(
-    ...STUDIOS.map((studio) => {
-      const themes = THEMES.filter((t) => t.studio === studio);
-      return h(
-        "div",
-        { class: "shelf", role: "group", "aria-label": `${studio}, ${themes.length} themes` },
-        h("ul", { class: "shelf-row" }, ...themes.map(facing)),
-        h(
-          "p",
-          { class: "shelf-edge" },
-          h("span", { class: "shelf-studio" }, studio),
-          h("span", { class: "shelf-meta" }, `${themes.length} themes, ${priceSpan(themes)}`),
-        ),
-      );
-    }),
+function bay(studio: Studio): HTMLElement {
+  const themes = THEMES.filter((t) => t.studio === studio);
+  const el = h(
+    "div",
+    { class: "bay", role: "group", "aria-label": `${studio}, ${themes.length} themes` },
+    h("ul", { class: "bay-row" }, ...themes.map(facing)),
+    h(
+      "p",
+      { class: "shelf-edge" },
+      h("span", { class: "shelf-studio" }, studio),
+      h("span", { class: "shelf-meta" }, `${themes.length} themes, ${priceSpan(themes)}`),
+    ),
   );
+  el.style.setProperty("--n", String(themes.length));
+  return el;
+}
+
+function drawWall(): void {
+  shelves.replaceChildren(...SHELVES.map((row) => h("div", { class: "shelf" }, ...row.map(bay))));
   shelves.addEventListener("pointerleave", () => shelves.parentElement!.classList.remove("is-reading"));
 }
 
