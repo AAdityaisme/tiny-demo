@@ -688,7 +688,7 @@ const ERROR_COPY: Record<Exclude<ErrorKind, "invalid">, { title: (d: string) => 
   },
   unreachable: {
     title: (d) => `We couldn’t open ${d}`,
-    body: () => "Check the spelling of the address and try again, or start from one of these stores.",
+    body: () => "Either the address has a typo or the site turns away automated visits. Check it and try again, or start from one of these stores.",
     retry: true,
   },
   network: {
